@@ -1,0 +1,17 @@
+name: adatralig
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - joblib
+  - pip:
+      - statsmodels==0.14.1
+      - yfinance==0.2.36
+      - plotly==5.19.0
+      - pmdarima==2.0.4
