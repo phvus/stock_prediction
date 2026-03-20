@@ -18,6 +18,15 @@ st.markdown(
     "You can forecast for a single company or a sector group."
 )
 
+TREND_THRESHOLD = 0.2
+DRIFT_BY_SYMBOL = {
+    "AAPL": 0.03,
+    "MSFT": 0.03,
+    "JPM": 0.015,
+    "BAC": 0.015,
+    "XOM": 0.005,
+}
+
 
 def _get_db_config() -> dict:
     return {
@@ -50,7 +59,7 @@ def _build_demo_companies() -> pd.DataFrame:
 def _build_demo_history(symbol: str, years: int = 2) -> pd.DataFrame:
     seed = abs(hash(symbol)) % (2**32)
     rng = pd.Series(range(years * 252), dtype=float)
-    drift = 0.03 if symbol in {"AAPL", "MSFT"} else (0.015 if symbol in {"JPM", "BAC"} else 0.005)
+    drift = DRIFT_BY_SYMBOL.get(symbol, 0.01)
     base = 100 + (seed % 50)
     close = base + (rng * drift) + (pd.Series(np.sin(rng / 8.0)) * 2.5)
     dates = pd.date_range(end=pd.Timestamp.today().normalize(), periods=len(rng), freq="B")
@@ -92,14 +101,22 @@ def load_symbol_history(symbol: str, years: int = 2) -> pd.DataFrame:
 def load_sector_history(companies: pd.DataFrame, sector: str, years: int = 2) -> pd.DataFrame:
     symbols = companies[companies["sector"] == sector]["symbol"].tolist()
     all_histories = []
+    failed_symbols = []
     for symbol in symbols:
         try:
             history = load_symbol_history(symbol, years=years)
         except Exception:
+            failed_symbols.append(symbol)
             continue
         if not history.empty:
             history["Symbol"] = symbol
             all_histories.append(history)
+
+    if failed_symbols:
+        st.warning(
+            f"Skipped {len(failed_symbols)} symbols with missing/unavailable history: "
+            f"{', '.join(failed_symbols[:5])}"
+        )
 
     if not all_histories:
         return pd.DataFrame(columns=["Date", "Close"])
@@ -112,9 +129,9 @@ def load_sector_history(companies: pd.DataFrame, sector: str, years: int = 2) ->
 
 def classify_trend(last_price: float, predicted_price: float) -> str:
     change_pct = ((predicted_price - last_price) / last_price) * 100
-    if change_pct > 0.2:
+    if change_pct > TREND_THRESHOLD:
         return "⬆️ Upward"
-    if change_pct < -0.2:
+    if change_pct < -TREND_THRESHOLD:
         return "⬇️ Downward"
     return "➡️ Sideways"
 
@@ -129,7 +146,7 @@ def summarize_horizons(result: dict, selected_horizons: list[int]) -> pd.DataFra
         predicted_price = float(preds[idx])
         rows.append(
             {
-                "Horizon": f"{days} day",
+                "Horizon": f"{days} day" if days == 1 else f"{days} days",
                 "Forecast date": dates[idx],
                 "Predicted close": round(predicted_price, 2),
                 "Change (%)": round(((predicted_price - last_price) / last_price) * 100, 2),
