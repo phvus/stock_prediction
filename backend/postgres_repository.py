@@ -171,11 +171,13 @@ class PostgresRepository:
                     return pd.DataFrame(columns=["Date", "Close", "Volume"])
 
                 query = sql.SQL(
-                    "SELECT time AS \"Date\", close AS \"Close\" FROM {} ORDER BY time"
+                    "SELECT time AS \"Date\", close AS \"Close\", volume AS \"Volume\" FROM {} ORDER BY time"
                 ).format(sql.Identifier(table_name))
                 with conn.cursor() as cur:
                     cur.execute(query)
                     rows = cur.fetchall()
+                print(f"Số lượng cột thực tế: {len(rows[0]) if rows else 0}")
+                print(f"Dữ liệu mẫu: {rows[0] if rows else 'Rỗng'}")
                 df = pd.DataFrame(rows, columns=["Date", "Close", "Volume"])
 
         if df.empty:

@@ -171,7 +171,9 @@ def upsert_normalized_prices(cur, history_df: pd.DataFrame) -> None:
     if history_df.empty:
         return
 
-    payload = history_df[["symbol", "time", "open", "high", "low", "close", "volume", "percent_change"]].values.tolist()
+    df = history_df.copy()
+    df["time"] = pd.to_datetime(df["time"]).dt.strftime("%Y-%m-%d")
+    payload = df[["symbol", "time", "open", "high", "low", "close", "volume", "percent_change"]].values.tolist()
     cur.executemany(
         """
         INSERT INTO public.stock_prices (symbol, time, open, high, low, close, volume, percent_change)
@@ -225,7 +227,9 @@ def upsert_legacy_symbol_table(cur, symbol: str, history_df: pd.DataFrame) -> No
         """
     ).format(sql.Identifier(table_name))
 
-    payload = history_df[["symbol", "time", "open", "high", "low", "close", "volume", "percent_change"]].values.tolist()
+    df = history_df.copy()
+    df["time"] = pd.to_datetime(df["time"]).dt.strftime("%Y-%m-%d")
+    payload = df[["symbol", "time", "open", "high", "low", "close", "volume", "percent_change"]].values.tolist()
     cur.executemany(insert_stmt, payload)
 
 

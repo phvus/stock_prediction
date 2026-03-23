@@ -747,28 +747,17 @@ validation_df["Date"] = pd.to_datetime(validation_df["Date"])
 hist_min = validation_df["Date"].min()
 hist_max = validation_df["Date"].max()
 
-# Clamp default dates safely to actual data range
 default_end = hist_max - pd.Timedelta(days=max(selected_days) + 2)
 if default_end < hist_min:
     default_end = hist_min
 default_start = max(hist_min, default_end - pd.Timedelta(days=120))
 
-# Ensure defaults are within bounds (safety for symbol switching)
-safe_min = hist_min.date()
-safe_max = hist_max.date()
-safe_default_start = max(safe_min, min(default_start.date(), safe_max))
-safe_default_end = max(safe_min, min(default_end.date(), safe_max))
-if safe_default_start > safe_default_end:
-    safe_default_start = safe_default_end
-
-st.caption(f"📅 Available data range: **{safe_min}** to **{safe_max}** ({len(validation_df)} trading days)")
-
 with date_col:
     backtest_range = st.date_input(
         "Validation Backtest Range",
-        value=(safe_default_start, safe_default_end),
-        min_value=safe_min,
-        max_value=safe_max,
+        value=(hist_min.date(), default_end.date()),
+        min_value=hist_min.date(),
+        max_value=hist_max.date(),
     )
     validation_horizons = st.multiselect(
         "Validation horizons",
@@ -789,14 +778,7 @@ with cap_col:
 if isinstance(backtest_range, (list, tuple)) and len(backtest_range) == 2:
     month_start_ts = pd.Timestamp(backtest_range[0])
     month_end_ts = pd.Timestamp(backtest_range[1])
-
-    # Validate selected dates are within actual data range
-    if month_start_ts.date() < safe_min or month_end_ts.date() > safe_max:
-        st.error(
-            f"⚠️ Selected dates are outside available data range ({safe_min} to {safe_max}). "
-            f"Please adjust your date selection to fit within the data range."
-        )
-    elif month_start_ts <= month_end_ts:
+    if month_start_ts <= month_end_ts:
         with st.expander("Preview Backtest Date Range in History", expanded=False):
             month_fig = make_month_window_chart(validation_df, month_start_ts, month_end_ts)
             st.plotly_chart(month_fig, use_container_width=True)
@@ -812,14 +794,7 @@ if run_full_analysis:
     else:
         start_ts = pd.Timestamp(backtest_range[0])
         end_ts = pd.Timestamp(backtest_range[1])
-
-        # Validate dates are within data range
-        if start_ts.date() < safe_min or end_ts.date() > safe_max:
-            st.error(
-                f"Selected validation dates ({start_ts.date()} to {end_ts.date()}) are outside "
-                f"available data range ({safe_min} to {safe_max}). Please adjust."
-            )
-        elif start_ts > end_ts:
+        if start_ts > end_ts:
             st.warning("Validation start date must be before end date.")
         else:
             with st.spinner("Phase 1: Training ARIMA on full dataset for diagnostics..."):
