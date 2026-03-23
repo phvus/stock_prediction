@@ -229,6 +229,101 @@ def upsert_legacy_symbol_table(cur, symbol: str, history_df: pd.DataFrame) -> No
     cur.executemany(insert_stmt, payload)
 
 
+def import_single_symbol(
+    symbol: str,
+    conn,
+    start_date: datetime,
+    end_date: datetime,
+    legacy_tables: bool = False,
+    max_attempts: int = 8,
+) -> dict:
+    """Import a single symbol into PostgreSQL. Returns a status dict.
+
+    Can be called from the dashboard or CLI.
+    """
+    for attempt in range(1, max_attempts + 1):
+        try:
+            company_df = info_company(symbol)
+            history_df = history_quote(
+                symbol,
+                start_date.strftime("%Y-%m-%d"),
+                end_date.strftime("%Y-%m-%d"),
+            )
+            if history_df.empty:
+                return {"symbol": symbol, "status": "skip", "message": "no quote history", "rows": 0}
+
+            with conn.cursor() as cur:
+                upsert_company(cur, company_df)
+                upsert_normalized_prices(cur, history_df)
+                if legacy_tables:
+                    upsert_legacy_symbol_table(cur, symbol, history_df)
+            conn.commit()
+            return {"symbol": symbol, "status": "ok", "message": f"{len(history_df)} rows", "rows": len(history_df)}
+        except BaseException as exc:
+            conn.rollback()
+            if is_rate_limit_error(exc) and attempt < max_attempts:
+                wait_seconds = get_retry_delay_seconds(exc)
+                time.sleep(wait_seconds)
+                continue
+
+            return {"symbol": symbol, "status": "error", "message": str(exc), "rows": 0}
+
+    return {"symbol": symbol, "status": "error", "message": "max retries exceeded", "rows": 0}
+
+
+def import_symbols_to_db(
+    symbols: List[str],
+    conn,
+    start_date: datetime | None = None,
+    end_date: datetime | None = None,
+    legacy_tables: bool = False,
+    progress_callback=None,
+) -> List[dict]:
+    """Import a list of symbols into PostgreSQL.
+
+    Args:
+        symbols: list of stock ticker symbols
+        conn: psycopg2 connection
+        start_date: start date (default: 730 days ago)
+        end_date: end date (default: today)
+        legacy_tables: also create per-symbol legacy tables
+        progress_callback: optional callable(index, total, result_dict)
+
+    Returns:
+        list of per-symbol result dicts
+    """
+    if end_date is None:
+        end_date = datetime.today()
+    if start_date is None:
+        start_date = end_date - timedelta(days=730)
+
+    with conn.cursor() as cur:
+        ensure_schema(cur)
+    conn.commit()
+
+    results: List[dict] = []
+    for idx, symbol in enumerate(symbols):
+        result = import_single_symbol(symbol, conn, start_date, end_date, legacy_tables=legacy_tables)
+        results.append(result)
+        if progress_callback:
+            progress_callback(idx, len(symbols), result)
+
+    return results
+
+
+def get_default_symbols() -> List[str]:
+    """Load symbols from VN100.txt relative to this script."""
+    script_dir = Path(__file__).resolve().parent
+    vn100_path = script_dir / "VN100.txt"
+    if vn100_path.exists():
+        return [
+            line.strip().upper()
+            for line in vn100_path.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+    return []
+
+
 def main() -> None:
     load_env_file()
     configure_vnstock_api_key()
@@ -259,45 +354,18 @@ def main() -> None:
         dbname=os.getenv("DB_NAME"),
     )
 
-    with conn:
-        with conn.cursor() as cur:
-            ensure_schema(cur)
+    def cli_progress(idx, total, result):
+        status = result["status"].upper()
+        print(f"[{status}] {result['symbol']}: {result['message']}")
 
-        for symbol in symbols:
-            max_attempts = 8
-            for attempt in range(1, max_attempts + 1):
-                try:
-                    company_df = info_company(symbol)
-                    history_df = history_quote(
-                        symbol,
-                        start_date.strftime("%Y-%m-%d"),
-                        end_date.strftime("%Y-%m-%d"),
-                    )
-                    if history_df.empty:
-                        print(f"[SKIP] {symbol}: no quote history")
-                        break
-
-                    with conn.cursor() as cur:
-                        upsert_company(cur, company_df)
-                        upsert_normalized_prices(cur, history_df)
-                        if args.legacy_tables:
-                            upsert_legacy_symbol_table(cur, symbol, history_df)
-                    conn.commit()
-                    print(f"[OK] {symbol}: {len(history_df)} rows")
-                    break
-                except BaseException as exc:
-                    conn.rollback()
-                    if is_rate_limit_error(exc) and attempt < max_attempts:
-                        wait_seconds = get_retry_delay_seconds(exc)
-                        print(
-                            f"[WAIT] {symbol}: rate limited on attempt {attempt}/{max_attempts}. "
-                            f"Sleeping {wait_seconds}s before retry..."
-                        )
-                        time.sleep(wait_seconds)
-                        continue
-
-                    print(f"[ERROR] {symbol}: {exc}")
-                    break
+    import_symbols_to_db(
+        symbols,
+        conn,
+        start_date=start_date,
+        end_date=end_date,
+        legacy_tables=args.legacy_tables,
+        progress_callback=cli_progress,
+    )
 
     conn.close()
     print("Import complete.")

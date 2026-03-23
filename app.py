@@ -5,33 +5,38 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from backend import PostgresRepository, predict_series, get_acf_pacf
+from backend import PostgresRepository, ApiRepository, predict_series, get_acf_pacf
 
-st.set_page_config(page_title="Stock Prediction (PostgreSQL + ARIMA)", layout="wide")
+st.set_page_config(page_title="Stock Prediction Dashboard", layout="wide")
 st.title("Stock Prediction Dashboard")
 st.caption(
-    "PostgreSQL-backed forecasting for company symbols and sector groups with Auto-ARIMA order selection."
+    "Forecasting for company symbols and sector groups with Auto-ARIMA order selection (Supports PostgreSQL or VNStock API)."
 )
 
 
 @st.cache_resource
-def get_repo() -> PostgresRepository:
+def get_postgres_repo() -> PostgresRepository:
     return PostgresRepository()
 
 
-@st.cache_data(ttl=600)
-def load_companies() -> pd.DataFrame:
-    return get_repo().get_companies()
+@st.cache_resource
+def get_api_repo() -> ApiRepository:
+    return ApiRepository()
 
 
 @st.cache_data(ttl=600)
-def load_symbol_history(symbol: str) -> pd.DataFrame:
-    return get_repo().get_symbol_history(symbol)
+def load_companies(_repo, source: str) -> pd.DataFrame:
+    return _repo.get_companies()
 
 
 @st.cache_data(ttl=600)
-def load_sector_history(sector: str) -> pd.DataFrame:
-    return get_repo().get_sector_history(sector)
+def load_symbol_history(_repo, source: str, symbol: str) -> pd.DataFrame:
+    return _repo.get_symbol_history(symbol)
+
+
+@st.cache_data(ttl=600)
+def load_sector_history(_repo, source: str, sector: str) -> pd.DataFrame:
+    return _repo.get_sector_history(sector)
 
 
 
@@ -549,15 +554,23 @@ def get_validation_history_window(
     return df.iloc[start_idx : target_end_idx + 1][["Date", "Close"]].copy()
 
 
-try:
-    repo = get_repo()
-    db_info = repo.test_connection()
-except Exception as exc:
-    st.error("Cannot connect to PostgreSQL. Set DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD.")
-    st.exception(exc)
-    st.stop()
+with st.sidebar:
+    st.header("Data Source")
+    data_source = st.radio("Select Backend Source:", ["PostgreSQL Database", "VNStock API (No DB required)"], index=1)
 
-companies_df = load_companies()
+if "PostgreSQL" in data_source:
+    try:
+        repo = get_postgres_repo()
+        db_info = repo.test_connection()
+    except Exception as exc:
+        st.error("Cannot connect to PostgreSQL. Please check credentials or switch to VNStock API Data Source in the sidebar.")
+        st.exception(exc)
+        st.stop()
+else:
+    repo = get_api_repo()
+    db_info = repo.test_connection()
+
+companies_df = load_companies(repo, data_source)
 symbols = sorted(companies_df["symbol"].astype(str).str.upper().unique().tolist()) if not companies_df.empty else []
 sectors = sorted(companies_df["sector"].astype(str).unique().tolist()) if not companies_df.empty else []
 
@@ -611,8 +624,74 @@ if not selected_days:
 
 if target_mode == "Company":
     if not symbols:
-        st.warning("No companies found. Run Import_Data.py to populate PostgreSQL first.")
-        st.stop()
+        if "PostgreSQL" in data_source:
+            st.warning("No companies found in database.")
+            st.info("Click below to import VN100 stock data from VNStock API directly into your PostgreSQL database.")
+            if st.button("🚀 Import VN100 Data to Database", type="primary", use_container_width=True):
+                try:
+                    from Import_Data import (
+                        get_default_symbols,
+                        import_symbols_to_db,
+                        configure_vnstock_api_key,
+                        load_env_file as import_load_env,
+                    )
+
+                    import_load_env()
+                    configure_vnstock_api_key()
+
+                    import_symbols = get_default_symbols()
+                    if not import_symbols:
+                        st.error("VN100.txt not found. Please create VN100.txt with stock symbols.")
+                        st.stop()
+
+                    st.write(f"Importing **{len(import_symbols)}** symbols into PostgreSQL...")
+                    progress_bar = st.progress(0, text="Starting import...")
+                    status_container = st.container()
+                    counts = {"ok": 0, "error": 0, "skip": 0}
+
+                    conn = repo._connect()
+                    try:
+                        def ui_progress(idx, total, result):
+                            pct = (idx + 1) / total
+                            if result["status"] == "ok":
+                                counts["ok"] += 1
+                            elif result["status"] == "error":
+                                counts["error"] += 1
+                            else:
+                                counts["skip"] += 1
+                            progress_bar.progress(
+                                pct,
+                                text=f"[{idx+1}/{total}] {result['symbol']}: {result['status'].upper()} – {result['message']}"
+                            )
+
+                        results = import_symbols_to_db(
+                            import_symbols,
+                            conn,
+                            legacy_tables=True,
+                            progress_callback=ui_progress,
+                        )
+                    finally:
+                        conn.close()
+
+                    progress_bar.progress(1.0, text="Import complete!")
+                    status_container.success(
+                        f"✅ Import finished: {counts['ok']} OK, {counts['skip']} skipped, {counts['error']} errors"
+                    )
+                    if counts["error"] > 0:
+                        failed = [r for r in results if r["status"] == "error"]
+                        with status_container.expander("Show errors"):
+                            for r in failed:
+                                st.write(f"**{r['symbol']}**: {r['message']}")
+
+                    st.cache_data.clear()
+                    st.rerun()
+                except Exception as exc:
+                    st.error(f"Import failed: {exc}")
+                    st.exception(exc)
+            st.stop()
+        else:
+            st.warning("No companies found. Check VN100.txt or switch to PostgreSQL mode.")
+            st.stop()
 
     if sectors:
         selected_sector = st.selectbox("Filter by sector", ["All"] + sectors)
@@ -631,7 +710,7 @@ if target_mode == "Company":
         candidate_symbols = symbols
 
     selected_target = st.selectbox("Choose company symbol", candidate_symbols)
-    history_df = load_symbol_history(selected_target)
+    history_df = load_symbol_history(repo, data_source, selected_target)
     chart_title = f"{selected_target} - Historical vs Forecast"
 else:
     if not sectors:
@@ -640,7 +719,7 @@ else:
 
     selected_target = st.selectbox("Choose sector group", sectors)
     selected_sector = selected_target
-    history_df = load_sector_history(selected_target)
+    history_df = load_sector_history(repo, data_source, selected_target)
     chart_title = f"Sector Average ({selected_target}) - Historical vs Forecast"
 
 if history_df.empty:
@@ -668,17 +747,28 @@ validation_df["Date"] = pd.to_datetime(validation_df["Date"])
 hist_min = validation_df["Date"].min()
 hist_max = validation_df["Date"].max()
 
+# Clamp default dates safely to actual data range
 default_end = hist_max - pd.Timedelta(days=max(selected_days) + 2)
 if default_end < hist_min:
     default_end = hist_min
 default_start = max(hist_min, default_end - pd.Timedelta(days=120))
 
+# Ensure defaults are within bounds (safety for symbol switching)
+safe_min = hist_min.date()
+safe_max = hist_max.date()
+safe_default_start = max(safe_min, min(default_start.date(), safe_max))
+safe_default_end = max(safe_min, min(default_end.date(), safe_max))
+if safe_default_start > safe_default_end:
+    safe_default_start = safe_default_end
+
+st.caption(f"📅 Available data range: **{safe_min}** to **{safe_max}** ({len(validation_df)} trading days)")
+
 with date_col:
     backtest_range = st.date_input(
         "Validation Backtest Range",
-        value=(hist_min.date(), default_end.date()),
-        min_value=hist_min.date(),
-        max_value=hist_max.date(),
+        value=(safe_default_start, safe_default_end),
+        min_value=safe_min,
+        max_value=safe_max,
     )
     validation_horizons = st.multiselect(
         "Validation horizons",
@@ -699,7 +789,14 @@ with cap_col:
 if isinstance(backtest_range, (list, tuple)) and len(backtest_range) == 2:
     month_start_ts = pd.Timestamp(backtest_range[0])
     month_end_ts = pd.Timestamp(backtest_range[1])
-    if month_start_ts <= month_end_ts:
+
+    # Validate selected dates are within actual data range
+    if month_start_ts.date() < safe_min or month_end_ts.date() > safe_max:
+        st.error(
+            f"⚠️ Selected dates are outside available data range ({safe_min} to {safe_max}). "
+            f"Please adjust your date selection to fit within the data range."
+        )
+    elif month_start_ts <= month_end_ts:
         with st.expander("Preview Backtest Date Range in History", expanded=False):
             month_fig = make_month_window_chart(validation_df, month_start_ts, month_end_ts)
             st.plotly_chart(month_fig, use_container_width=True)
@@ -715,7 +812,14 @@ if run_full_analysis:
     else:
         start_ts = pd.Timestamp(backtest_range[0])
         end_ts = pd.Timestamp(backtest_range[1])
-        if start_ts > end_ts:
+
+        # Validate dates are within data range
+        if start_ts.date() < safe_min or end_ts.date() > safe_max:
+            st.error(
+                f"Selected validation dates ({start_ts.date()} to {end_ts.date()}) are outside "
+                f"available data range ({safe_min} to {safe_max}). Please adjust."
+            )
+        elif start_ts > end_ts:
             st.warning("Validation start date must be before end date.")
         else:
             with st.spinner("Phase 1: Training ARIMA on full dataset for diagnostics..."):

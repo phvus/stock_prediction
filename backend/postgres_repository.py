@@ -44,7 +44,7 @@ class DbConfig:
         missing = [
             key
             for key in ("DB_HOST", "DB_PORT", "DB_NAME", "DB_USER", "DB_PASSWORD")
-            if not os.getenv(key)
+            if os.getenv(key) is None
         ]
         if missing:
             raise ValueError(
