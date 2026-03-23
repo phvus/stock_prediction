@@ -247,7 +247,6 @@ def run_historical_validation(
     model_type: str,
     use_log_returns: bool = False,
     use_sentiment: bool = False,
-    use_volume: bool = False,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     df = history_df.copy()
     df["Date"] = pd.to_datetime(df["Date"])
@@ -267,7 +266,7 @@ def run_historical_validation(
 
     rows: list[dict] = []
     for idx in candidate_idx:
-        train_df = df.iloc[: idx + 1].copy()
+        train_df = df.iloc[: idx + 1][["Date", "Close"]].copy()
         if len(train_df) < 60:
             continue
 
@@ -280,7 +279,6 @@ def run_historical_validation(
                 model_type=model_type,
                 use_log_returns=use_log_returns,
                 use_sentiment=use_sentiment,
-                use_volume=use_volume,
             )
         except Exception:
             continue
@@ -494,7 +492,7 @@ def explain_validation_results(summary_df: pd.DataFrame, selected_horizon: int) 
     )
 
 
-def explain_model_parameters(model_type: str, order: tuple[int, int, int], use_log: bool, use_sentiment: bool, use_volume: bool = False) -> str:
+def explain_model_parameters(model_type: str, order: tuple[int, int, int], use_log: bool, use_sentiment: bool) -> str:
     p, d, q = order
     model_name = model_type.upper()
 
@@ -516,9 +514,6 @@ def explain_model_parameters(model_type: str, order: tuple[int, int, int], use_l
         )
         if use_sentiment:
             lines.append("- Sentiment Feature: injects simulated market sentiment text/news scores as a leading correlation indicator.")
-        if use_volume:
-            lines.append("- Volume Feature: injects actual traded Volume data dynamically scaling predictions with market activity.")
-
 
     if d == 1:
         lines.append("In plain language: the model predicts day-to-day price change, then converts it back to price level.")
@@ -582,13 +577,10 @@ with st.sidebar:
     st.session_state["use_log_returns"] = use_log_returns
     
     use_sentiment = False
-    use_volume = False
     if selected_model_type == "arimax":
         use_sentiment = st.toggle("Include Sentiment Feature", value=False, help="Integrate market news sentiment as a daily exogenous feature in ARIMAX.")
-        st.session_state["use_sentiment"] = use_sentiment
-        
-        use_volume = st.toggle("Include Actual Trade Volume", value=False, help="Integrate raw trading Volume from your database as an exogenous feature in ARIMAX.")
-        st.session_state["use_volume"] = use_volume
+    st.session_state["use_sentiment"] = use_sentiment
+    
     selected_days = st.multiselect(
         "Select analysis horizons (days)",
         options=[1, 3, 5],
@@ -647,13 +639,19 @@ if history_df.empty:
     st.error("Not enough data for this target. Need at least 60 data points.")
     st.stop()
 
+col_left, col_right = st.columns([3, 1])
+with col_right:
+    st.subheader("Run Model")
+    run_prediction = st.button("Fit Historical Model & Diagnostics", type="primary", use_container_width=True)
+    st.caption(f"Model: {selected_model_type.upper()} with Auto-order (AIC grid search)")
 
-st.subheader("Data & Analysis Configuration")
-metric_col, date_col, cap_col = st.columns(3)
-with metric_col:
-    st.write(f"**Target:** {selected_target}")
-    st.write(f"**Rows available:** {len(history_df)}")
-    st.write(f"**Range:** {history_df['Date'].min().date()} to {history_df['Date'].max().date()}")
+with col_left:
+    st.subheader("Input Data")
+    st.write(f"Target: {selected_target}")
+    st.write(f"Rows available: {len(history_df)}")
+    st.write(
+        f"Date range: {history_df['Date'].min().date()} to {history_df['Date'].max().date()}"
+    )
 
     # Data Continuity Check
     dates = pd.to_datetime(history_df["Date"]).sort_values()
@@ -662,103 +660,20 @@ with metric_col:
     if not gaps.empty:
         st.warning(f"⚠️ **Data Quality Warning:** Found {len(gaps)} significant time gaps in history (e.g. missing >3 days). Time series models assume regular intervals. Consider checking the data source or ensuring these are only standard market holidays.")
 
-# Setup validation parameters
-validation_df = history_df.copy().sort_values("Date")
-validation_df["Date"] = pd.to_datetime(validation_df["Date"])
-hist_min = validation_df["Date"].min()
-hist_max = validation_df["Date"].max()
+if run_prediction:
+    with st.spinner("Training ARIMA..."):
+        prediction = predict_series(
+            history_df,
+            horizons=selected_days,
+            auto_order=auto_order,
+            manual_order=manual_order,
+            model_type=selected_model_type,
+            use_log_returns=use_log_returns,
+            use_sentiment=use_sentiment,
+        )
 
-default_end = hist_max - pd.Timedelta(days=max(selected_days) + 2)
-if default_end < hist_min:
-    default_end = hist_min
-default_start = max(hist_min, default_end - pd.Timedelta(days=120))
+    st.subheader("Historical Model Fit & Diagnostics")
 
-with date_col:
-    backtest_range = st.date_input(
-        "Validation Backtest Range",
-        value=(hist_min.date(), default_end.date()),
-        min_value=hist_min.date(),
-        max_value=hist_max.date(),
-    )
-    validation_horizons = st.multiselect(
-        "Validation horizons",
-        options=selected_days,
-        default=selected_days,
-        help="Use the same horizons you forecast, such as 1/3/5.",
-    )
-
-with cap_col:
-    initial_capital = st.number_input(
-        "Initial capital ($)",
-        min_value=1000.0,
-        value=100000.0,
-        step=1000.0,
-    )
-
-# Preview Backtest Range
-if isinstance(backtest_range, (list, tuple)) and len(backtest_range) == 2:
-    month_start_ts = pd.Timestamp(backtest_range[0])
-    month_end_ts = pd.Timestamp(backtest_range[1])
-    if month_start_ts <= month_end_ts:
-        with st.expander("Preview Backtest Date Range in History", expanded=False):
-            month_fig = make_month_window_chart(validation_df, month_start_ts, month_end_ts)
-            st.plotly_chart(month_fig, use_container_width=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-run_full_analysis = st.button("Run Full Historical Diagnostics & Backtest", type="primary", use_container_width=True)
-
-if run_full_analysis:
-    if not isinstance(backtest_range, (list, tuple)) or len(backtest_range) != 2:
-        st.warning("Please select both start and end dates for validation.")
-    elif not validation_horizons:
-        st.warning("Please select at least one validation horizon.")
-    else:
-        start_ts = pd.Timestamp(backtest_range[0])
-        end_ts = pd.Timestamp(backtest_range[1])
-        if start_ts > end_ts:
-            st.warning("Validation start date must be before end date.")
-        else:
-            with st.spinner("Phase 1: Training ARIMA on full dataset for diagnostics..."):
-                prediction = predict_series(
-                    history_df,
-                    horizons=selected_days,
-                    auto_order=auto_order,
-                    manual_order=manual_order,
-                    model_type=selected_model_type,
-                    use_log_returns=use_log_returns,
-                    use_sentiment=use_sentiment,
-                    use_volume=use_volume,
-                )
-                st.session_state["prediction_diagnostics"] = prediction
-
-            with st.spinner("Phase 2: Running historical backtest over selected past dates..."):
-                val_summary, val_details = run_historical_validation(
-                    validation_df,
-                    start_date=start_ts,
-                    end_date=end_ts,
-                    horizons=validation_horizons,
-                    auto_order=auto_order,
-                    manual_order=manual_order,
-                    model_type=selected_model_type,
-                    use_log_returns=use_log_returns,
-                    use_sentiment=use_sentiment,
-                    use_volume=use_volume,
-                )
-                val_history_used = get_validation_history_window(
-                    validation_df,
-                    start_date=start_ts,
-                    end_date=end_ts,
-                    max_horizon=max(validation_horizons),
-                )
-                st.session_state["val_summary"] = val_summary
-                st.session_state["val_details"] = val_details
-                st.session_state["val_history_used"] = val_history_used
-
-if "prediction_diagnostics" in st.session_state:
-    st.markdown("---")
-    st.subheader("Phase 1: Historical Model Fit & Diagnostics")
-    
-    prediction = st.session_state["prediction_diagnostics"]
     eval_metrics = prediction["evaluation"]
     stationarity = prediction["stationarity"]
 
@@ -769,7 +684,7 @@ if "prediction_diagnostics" in st.session_state:
     metric_cols[3].metric("MAPE", f"{eval_metrics['mape']:.2f}%")
 
     st.caption(f"Model type used: {prediction.get('model_type', selected_model_type).upper()}")
-    st.info(explain_model_parameters(selected_model_type, prediction["selected_order"], use_log_returns, use_sentiment, use_volume))
+    st.info(explain_model_parameters(selected_model_type, prediction["selected_order"], use_log_returns, use_sentiment))
 
     st.caption(stationarity["interpretation"])
 
@@ -785,7 +700,8 @@ if "prediction_diagnostics" in st.session_state:
         failed = order_diag_df[order_diag_df["status"] != "ok"]
         if not failed.empty:
             st.caption("Some candidate orders failed to converge during auto-selection.")
-
+    
+    # ACF / PACF Chart
     acf_vals, pacf_vals = get_acf_pacf(history_df)
     if acf_vals and pacf_vals:
         fig_acf = go.Figure()
@@ -803,11 +719,82 @@ if "prediction_diagnostics" in st.session_state:
 
     st.text(prediction["model_summary"]["full_summary"])
 
+st.markdown("---")
+st.subheader("Historical Validation")
+st.caption("Select a past date range to backtest and verify forecast accuracy (%).")
+
+validation_df = history_df.copy().sort_values("Date")
+validation_df["Date"] = pd.to_datetime(validation_df["Date"])
+hist_min = validation_df["Date"].min()
+hist_max = validation_df["Date"].max()
+
+default_end = hist_max - pd.Timedelta(days=max(selected_days) + 2)
+if default_end < hist_min:
+    default_end = hist_min
+default_start = max(hist_min, default_end - pd.Timedelta(days=120))
+
+backtest_range = st.date_input(
+    "Validation date range",
+    value=(hist_min.date(), default_end.date()),
+    min_value=hist_min.date(),
+    max_value=hist_max.date(),
+)
+
+if isinstance(backtest_range, (list, tuple)) and len(backtest_range) == 2:
+    month_start_ts = pd.Timestamp(backtest_range[0])
+    month_end_ts = pd.Timestamp(backtest_range[1])
+    if month_start_ts <= month_end_ts:
+        month_fig = make_month_window_chart(validation_df, month_start_ts, month_end_ts)
+        st.plotly_chart(month_fig, use_container_width=True)
+
+validation_horizons = st.multiselect(
+    "Validation horizons",
+    options=selected_days,
+    default=selected_days,
+    help="Use the same horizons you forecast, such as 1/3/5.",
+)
+initial_capital = st.number_input(
+    "Initial capital for return/profit simulation",
+    min_value=1000.0,
+    value=100000.0,
+    step=1000.0,
+)
+run_validation = st.button("Run historical validation", use_container_width=True)
+
+if run_validation:
+    if not isinstance(backtest_range, (list, tuple)) or len(backtest_range) != 2:
+        st.warning("Please select both start and end dates for validation.")
+    elif not validation_horizons:
+        st.warning("Please select at least one validation horizon.")
+    else:
+        start_ts = pd.Timestamp(backtest_range[0])
+        end_ts = pd.Timestamp(backtest_range[1])
+        if start_ts > end_ts:
+            st.warning("Validation start date must be before end date.")
+        else:
+            with st.spinner("Running historical backtest over selected past dates..."):
+                val_summary, val_details = run_historical_validation(
+                    validation_df,
+                    start_date=start_ts,
+                    end_date=end_ts,
+                    horizons=validation_horizons,
+                    auto_order=auto_order,
+                    manual_order=manual_order,
+                    model_type=selected_model_type,
+                    use_log_returns=use_log_returns,
+                    use_sentiment=use_sentiment,
+                )
+                val_history_used = get_validation_history_window(
+                    validation_df,
+                    start_date=start_ts,
+                    end_date=end_ts,
+                    max_horizon=max(validation_horizons),
+                )
+            st.session_state["val_summary"] = val_summary
+            st.session_state["val_details"] = val_details
+            st.session_state["val_history_used"] = val_history_used
 
 if "val_summary" in st.session_state and "val_details" in st.session_state:
-    st.markdown("---")
-    st.subheader("Phase 2: Historical Validation & Backtest Results")
-    
     val_summary = st.session_state["val_summary"]
     val_details = st.session_state["val_details"]
     if val_summary.empty:
