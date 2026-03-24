@@ -152,7 +152,13 @@ def upsert_company(cur, company_df: pd.DataFrame) -> None:
     if company_df.empty:
         return
 
-    payload = company_df[["symbol", "icb_name2", "listing_date", "ceo_name"]].values.tolist()
+    df = company_df.copy()
+    if "listing_date" in df.columns:
+        # Handle Vietnamese date format (DD/MM/YYYY) correctly
+        df["listing_date"] = pd.to_datetime(df["listing_date"], errors="coerce", dayfirst=True)
+        df["listing_date"] = df["listing_date"].apply(lambda x: x.strftime("%Y-%m-%d") if pd.notnull(x) else None)
+
+    payload = df[["symbol", "icb_name2", "listing_date", "ceo_name"]].values.tolist()
     cur.executemany(
         """
         INSERT INTO public.company_info (symbol, icb_name2, listing_date, ceo_name)
