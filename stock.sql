@@ -2,10 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict wKqHBNYrdkeaOFcuhjBlO5MJsdl2RvwotuSk1WuCUtFw7zru0wMzyeZA18mZ1mV
+\restrict UkOucpbU83OPflCOyWIJK600gQN4Ez4JkyaBfE7lsvCJrOwRxHysel4Hov13LPO
 
 -- Dumped from database version 18.3
 -- Dumped by pg_dump version 18.3
+
+-- Started on 2026-03-24 13:25:41
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -24,6 +26,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- TOC entry 241 (class 1259 OID 16814)
 -- Name: acb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -42,6 +45,7 @@ CREATE TABLE public.acb (
 ALTER TABLE public.acb OWNER TO postgres;
 
 --
+-- TOC entry 220 (class 1259 OID 16687)
 -- Name: anv; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -60,6 +64,7 @@ CREATE TABLE public.anv (
 ALTER TABLE public.anv OWNER TO postgres;
 
 --
+-- TOC entry 221 (class 1259 OID 16693)
 -- Name: bcm; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -78,6 +83,7 @@ CREATE TABLE public.bcm (
 ALTER TABLE public.bcm OWNER TO postgres;
 
 --
+-- TOC entry 222 (class 1259 OID 16699)
 -- Name: bid; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -96,6 +102,7 @@ CREATE TABLE public.bid (
 ALTER TABLE public.bid OWNER TO postgres;
 
 --
+-- TOC entry 223 (class 1259 OID 16705)
 -- Name: bmp; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -114,6 +121,7 @@ CREATE TABLE public.bmp (
 ALTER TABLE public.bmp OWNER TO postgres;
 
 --
+-- TOC entry 224 (class 1259 OID 16711)
 -- Name: bsi; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -132,6 +140,7 @@ CREATE TABLE public.bsi (
 ALTER TABLE public.bsi OWNER TO postgres;
 
 --
+-- TOC entry 225 (class 1259 OID 16717)
 -- Name: bsr; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -150,6 +159,7 @@ CREATE TABLE public.bsr (
 ALTER TABLE public.bsr OWNER TO postgres;
 
 --
+-- TOC entry 226 (class 1259 OID 16723)
 -- Name: bvh; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -168,6 +178,7 @@ CREATE TABLE public.bvh (
 ALTER TABLE public.bvh OWNER TO postgres;
 
 --
+-- TOC entry 227 (class 1259 OID 16729)
 -- Name: bwe; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -186,6 +197,7 @@ CREATE TABLE public.bwe (
 ALTER TABLE public.bwe OWNER TO postgres;
 
 --
+-- TOC entry 228 (class 1259 OID 16735)
 -- Name: cii; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -204,6 +216,7 @@ CREATE TABLE public.cii (
 ALTER TABLE public.cii OWNER TO postgres;
 
 --
+-- TOC entry 229 (class 1259 OID 16741)
 -- Name: cmg; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -222,6 +235,7 @@ CREATE TABLE public.cmg (
 ALTER TABLE public.cmg OWNER TO postgres;
 
 --
+-- TOC entry 219 (class 1259 OID 16437)
 -- Name: company_info; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -236,6 +250,7 @@ CREATE TABLE public.company_info (
 ALTER TABLE public.company_info OWNER TO postgres;
 
 --
+-- TOC entry 230 (class 1259 OID 16747)
 -- Name: ctd; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -254,6 +269,7 @@ CREATE TABLE public.ctd (
 ALTER TABLE public.ctd OWNER TO postgres;
 
 --
+-- TOC entry 231 (class 1259 OID 16753)
 -- Name: ctg; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -272,6 +288,7 @@ CREATE TABLE public.ctg (
 ALTER TABLE public.ctg OWNER TO postgres;
 
 --
+-- TOC entry 232 (class 1259 OID 16759)
 -- Name: ctr; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -290,6 +307,7 @@ CREATE TABLE public.ctr (
 ALTER TABLE public.ctr OWNER TO postgres;
 
 --
+-- TOC entry 233 (class 1259 OID 16765)
 -- Name: cts; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -308,6 +326,7 @@ CREATE TABLE public.cts (
 ALTER TABLE public.cts OWNER TO postgres;
 
 --
+-- TOC entry 234 (class 1259 OID 16771)
 -- Name: dbc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -326,6 +345,7 @@ CREATE TABLE public.dbc (
 ALTER TABLE public.dbc OWNER TO postgres;
 
 --
+-- TOC entry 235 (class 1259 OID 16777)
 -- Name: dcm; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -344,6 +364,7 @@ CREATE TABLE public.dcm (
 ALTER TABLE public.dcm OWNER TO postgres;
 
 --
+-- TOC entry 236 (class 1259 OID 16783)
 -- Name: dgc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -362,6 +383,7 @@ CREATE TABLE public.dgc (
 ALTER TABLE public.dgc OWNER TO postgres;
 
 --
+-- TOC entry 237 (class 1259 OID 16789)
 -- Name: dgw; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -380,6 +402,7 @@ CREATE TABLE public.dgw (
 ALTER TABLE public.dgw OWNER TO postgres;
 
 --
+-- TOC entry 238 (class 1259 OID 16795)
 -- Name: dig; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -398,6 +421,7 @@ CREATE TABLE public.dig (
 ALTER TABLE public.dig OWNER TO postgres;
 
 --
+-- TOC entry 239 (class 1259 OID 16801)
 -- Name: dpm; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -416,6 +440,7 @@ CREATE TABLE public.dpm (
 ALTER TABLE public.dpm OWNER TO postgres;
 
 --
+-- TOC entry 240 (class 1259 OID 16807)
 -- Name: dse; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -434,6 +459,7 @@ CREATE TABLE public.dse (
 ALTER TABLE public.dse OWNER TO postgres;
 
 --
+-- TOC entry 242 (class 1259 OID 16820)
 -- Name: dxg; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -452,6 +478,7 @@ CREATE TABLE public.dxg (
 ALTER TABLE public.dxg OWNER TO postgres;
 
 --
+-- TOC entry 243 (class 1259 OID 16826)
 -- Name: dxs; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -470,6 +497,7 @@ CREATE TABLE public.dxs (
 ALTER TABLE public.dxs OWNER TO postgres;
 
 --
+-- TOC entry 244 (class 1259 OID 16832)
 -- Name: eib; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -488,6 +516,7 @@ CREATE TABLE public.eib (
 ALTER TABLE public.eib OWNER TO postgres;
 
 --
+-- TOC entry 245 (class 1259 OID 16838)
 -- Name: evf; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -506,6 +535,7 @@ CREATE TABLE public.evf (
 ALTER TABLE public.evf OWNER TO postgres;
 
 --
+-- TOC entry 246 (class 1259 OID 16844)
 -- Name: fpt; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -524,6 +554,7 @@ CREATE TABLE public.fpt (
 ALTER TABLE public.fpt OWNER TO postgres;
 
 --
+-- TOC entry 247 (class 1259 OID 16850)
 -- Name: frt; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -542,6 +573,7 @@ CREATE TABLE public.frt (
 ALTER TABLE public.frt OWNER TO postgres;
 
 --
+-- TOC entry 248 (class 1259 OID 16856)
 -- Name: fts; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -560,6 +592,7 @@ CREATE TABLE public.fts (
 ALTER TABLE public.fts OWNER TO postgres;
 
 --
+-- TOC entry 249 (class 1259 OID 16862)
 -- Name: gas; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -578,6 +611,7 @@ CREATE TABLE public.gas (
 ALTER TABLE public.gas OWNER TO postgres;
 
 --
+-- TOC entry 250 (class 1259 OID 16868)
 -- Name: gee; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -596,6 +630,7 @@ CREATE TABLE public.gee (
 ALTER TABLE public.gee OWNER TO postgres;
 
 --
+-- TOC entry 251 (class 1259 OID 16874)
 -- Name: gex; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -614,6 +649,7 @@ CREATE TABLE public.gex (
 ALTER TABLE public.gex OWNER TO postgres;
 
 --
+-- TOC entry 252 (class 1259 OID 16880)
 -- Name: gmd; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -632,6 +668,7 @@ CREATE TABLE public.gmd (
 ALTER TABLE public.gmd OWNER TO postgres;
 
 --
+-- TOC entry 253 (class 1259 OID 16886)
 -- Name: gvr; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -650,6 +687,7 @@ CREATE TABLE public.gvr (
 ALTER TABLE public.gvr OWNER TO postgres;
 
 --
+-- TOC entry 254 (class 1259 OID 16892)
 -- Name: hag; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -668,6 +706,7 @@ CREATE TABLE public.hag (
 ALTER TABLE public.hag OWNER TO postgres;
 
 --
+-- TOC entry 255 (class 1259 OID 16898)
 -- Name: hcm; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -686,6 +725,7 @@ CREATE TABLE public.hcm (
 ALTER TABLE public.hcm OWNER TO postgres;
 
 --
+-- TOC entry 256 (class 1259 OID 16904)
 -- Name: hdb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -704,6 +744,7 @@ CREATE TABLE public.hdb (
 ALTER TABLE public.hdb OWNER TO postgres;
 
 --
+-- TOC entry 257 (class 1259 OID 16910)
 -- Name: hdc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -722,6 +763,7 @@ CREATE TABLE public.hdc (
 ALTER TABLE public.hdc OWNER TO postgres;
 
 --
+-- TOC entry 258 (class 1259 OID 16916)
 -- Name: hdg; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -740,6 +782,7 @@ CREATE TABLE public.hdg (
 ALTER TABLE public.hdg OWNER TO postgres;
 
 --
+-- TOC entry 259 (class 1259 OID 16922)
 -- Name: hhv; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -758,6 +801,7 @@ CREATE TABLE public.hhv (
 ALTER TABLE public.hhv OWNER TO postgres;
 
 --
+-- TOC entry 260 (class 1259 OID 16928)
 -- Name: hpg; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -776,6 +820,7 @@ CREATE TABLE public.hpg (
 ALTER TABLE public.hpg OWNER TO postgres;
 
 --
+-- TOC entry 315 (class 1259 OID 17266)
 -- Name: hsg; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -794,6 +839,7 @@ CREATE TABLE public.hsg (
 ALTER TABLE public.hsg OWNER TO postgres;
 
 --
+-- TOC entry 261 (class 1259 OID 16934)
 -- Name: ht1; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -812,6 +858,7 @@ CREATE TABLE public.ht1 (
 ALTER TABLE public.ht1 OWNER TO postgres;
 
 --
+-- TOC entry 262 (class 1259 OID 16940)
 -- Name: imp; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -830,6 +877,7 @@ CREATE TABLE public.imp (
 ALTER TABLE public.imp OWNER TO postgres;
 
 --
+-- TOC entry 263 (class 1259 OID 16946)
 -- Name: kbc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -848,6 +896,7 @@ CREATE TABLE public.kbc (
 ALTER TABLE public.kbc OWNER TO postgres;
 
 --
+-- TOC entry 264 (class 1259 OID 16952)
 -- Name: kdc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -866,6 +915,7 @@ CREATE TABLE public.kdc (
 ALTER TABLE public.kdc OWNER TO postgres;
 
 --
+-- TOC entry 265 (class 1259 OID 16958)
 -- Name: kdh; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -884,6 +934,7 @@ CREATE TABLE public.kdh (
 ALTER TABLE public.kdh OWNER TO postgres;
 
 --
+-- TOC entry 266 (class 1259 OID 16964)
 -- Name: kos; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -902,6 +953,7 @@ CREATE TABLE public.kos (
 ALTER TABLE public.kos OWNER TO postgres;
 
 --
+-- TOC entry 267 (class 1259 OID 16970)
 -- Name: lpb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -920,6 +972,7 @@ CREATE TABLE public.lpb (
 ALTER TABLE public.lpb OWNER TO postgres;
 
 --
+-- TOC entry 268 (class 1259 OID 16976)
 -- Name: mbb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -938,6 +991,7 @@ CREATE TABLE public.mbb (
 ALTER TABLE public.mbb OWNER TO postgres;
 
 --
+-- TOC entry 269 (class 1259 OID 16982)
 -- Name: msb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -956,6 +1010,7 @@ CREATE TABLE public.msb (
 ALTER TABLE public.msb OWNER TO postgres;
 
 --
+-- TOC entry 270 (class 1259 OID 16988)
 -- Name: msn; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -974,6 +1029,7 @@ CREATE TABLE public.msn (
 ALTER TABLE public.msn OWNER TO postgres;
 
 --
+-- TOC entry 271 (class 1259 OID 16994)
 -- Name: mwg; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -992,6 +1048,7 @@ CREATE TABLE public.mwg (
 ALTER TABLE public.mwg OWNER TO postgres;
 
 --
+-- TOC entry 272 (class 1259 OID 17000)
 -- Name: nab; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1010,6 +1067,7 @@ CREATE TABLE public.nab (
 ALTER TABLE public.nab OWNER TO postgres;
 
 --
+-- TOC entry 273 (class 1259 OID 17006)
 -- Name: nkg; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1028,6 +1086,7 @@ CREATE TABLE public.nkg (
 ALTER TABLE public.nkg OWNER TO postgres;
 
 --
+-- TOC entry 274 (class 1259 OID 17012)
 -- Name: nlg; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1046,6 +1105,7 @@ CREATE TABLE public.nlg (
 ALTER TABLE public.nlg OWNER TO postgres;
 
 --
+-- TOC entry 275 (class 1259 OID 17018)
 -- Name: nt2; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1064,6 +1124,7 @@ CREATE TABLE public.nt2 (
 ALTER TABLE public.nt2 OWNER TO postgres;
 
 --
+-- TOC entry 276 (class 1259 OID 17024)
 -- Name: nvl; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1082,6 +1143,7 @@ CREATE TABLE public.nvl (
 ALTER TABLE public.nvl OWNER TO postgres;
 
 --
+-- TOC entry 277 (class 1259 OID 17030)
 -- Name: ocb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1100,6 +1162,7 @@ CREATE TABLE public.ocb (
 ALTER TABLE public.ocb OWNER TO postgres;
 
 --
+-- TOC entry 278 (class 1259 OID 17036)
 -- Name: pan; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1118,6 +1181,7 @@ CREATE TABLE public.pan (
 ALTER TABLE public.pan OWNER TO postgres;
 
 --
+-- TOC entry 279 (class 1259 OID 17042)
 -- Name: pc1; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1136,6 +1200,7 @@ CREATE TABLE public.pc1 (
 ALTER TABLE public.pc1 OWNER TO postgres;
 
 --
+-- TOC entry 280 (class 1259 OID 17048)
 -- Name: pdr; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1154,6 +1219,7 @@ CREATE TABLE public.pdr (
 ALTER TABLE public.pdr OWNER TO postgres;
 
 --
+-- TOC entry 316 (class 1259 OID 17272)
 -- Name: phr; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1172,6 +1238,7 @@ CREATE TABLE public.phr (
 ALTER TABLE public.phr OWNER TO postgres;
 
 --
+-- TOC entry 281 (class 1259 OID 17054)
 -- Name: plx; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1190,6 +1257,7 @@ CREATE TABLE public.plx (
 ALTER TABLE public.plx OWNER TO postgres;
 
 --
+-- TOC entry 282 (class 1259 OID 17061)
 -- Name: pnj; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1208,6 +1276,7 @@ CREATE TABLE public.pnj (
 ALTER TABLE public.pnj OWNER TO postgres;
 
 --
+-- TOC entry 283 (class 1259 OID 17067)
 -- Name: pow; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1226,6 +1295,7 @@ CREATE TABLE public.pow (
 ALTER TABLE public.pow OWNER TO postgres;
 
 --
+-- TOC entry 284 (class 1259 OID 17073)
 -- Name: pvd; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1244,6 +1314,7 @@ CREATE TABLE public.pvd (
 ALTER TABLE public.pvd OWNER TO postgres;
 
 --
+-- TOC entry 285 (class 1259 OID 17079)
 -- Name: pvt; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1262,6 +1333,7 @@ CREATE TABLE public.pvt (
 ALTER TABLE public.pvt OWNER TO postgres;
 
 --
+-- TOC entry 286 (class 1259 OID 17085)
 -- Name: ree; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1280,6 +1352,7 @@ CREATE TABLE public.ree (
 ALTER TABLE public.ree OWNER TO postgres;
 
 --
+-- TOC entry 287 (class 1259 OID 17091)
 -- Name: sab; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1298,6 +1371,7 @@ CREATE TABLE public.sab (
 ALTER TABLE public.sab OWNER TO postgres;
 
 --
+-- TOC entry 288 (class 1259 OID 17097)
 -- Name: sbt; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1316,6 +1390,7 @@ CREATE TABLE public.sbt (
 ALTER TABLE public.sbt OWNER TO postgres;
 
 --
+-- TOC entry 289 (class 1259 OID 17103)
 -- Name: scs; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1334,6 +1409,7 @@ CREATE TABLE public.scs (
 ALTER TABLE public.scs OWNER TO postgres;
 
 --
+-- TOC entry 290 (class 1259 OID 17109)
 -- Name: shb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1352,6 +1428,7 @@ CREATE TABLE public.shb (
 ALTER TABLE public.shb OWNER TO postgres;
 
 --
+-- TOC entry 291 (class 1259 OID 17115)
 -- Name: sip; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1370,6 +1447,7 @@ CREATE TABLE public.sip (
 ALTER TABLE public.sip OWNER TO postgres;
 
 --
+-- TOC entry 292 (class 1259 OID 17121)
 -- Name: sjs; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1388,6 +1466,7 @@ CREATE TABLE public.sjs (
 ALTER TABLE public.sjs OWNER TO postgres;
 
 --
+-- TOC entry 293 (class 1259 OID 17127)
 -- Name: ssb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1406,6 +1485,7 @@ CREATE TABLE public.ssb (
 ALTER TABLE public.ssb OWNER TO postgres;
 
 --
+-- TOC entry 318 (class 1259 OID 18492)
 -- Name: ssi; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1424,6 +1504,7 @@ CREATE TABLE public.ssi (
 ALTER TABLE public.ssi OWNER TO postgres;
 
 --
+-- TOC entry 294 (class 1259 OID 17139)
 -- Name: stb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1442,6 +1523,7 @@ CREATE TABLE public.stb (
 ALTER TABLE public.stb OWNER TO postgres;
 
 --
+-- TOC entry 295 (class 1259 OID 17145)
 -- Name: szc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1460,6 +1542,7 @@ CREATE TABLE public.szc (
 ALTER TABLE public.szc OWNER TO postgres;
 
 --
+-- TOC entry 296 (class 1259 OID 17151)
 -- Name: tch; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1478,6 +1561,7 @@ CREATE TABLE public.tch (
 ALTER TABLE public.tch OWNER TO postgres;
 
 --
+-- TOC entry 297 (class 1259 OID 17157)
 -- Name: tpb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1496,6 +1580,7 @@ CREATE TABLE public.tpb (
 ALTER TABLE public.tpb OWNER TO postgres;
 
 --
+-- TOC entry 298 (class 1259 OID 17163)
 -- Name: vcb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1514,6 +1599,7 @@ CREATE TABLE public.vcb (
 ALTER TABLE public.vcb OWNER TO postgres;
 
 --
+-- TOC entry 299 (class 1259 OID 17169)
 -- Name: vcg; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1532,6 +1618,7 @@ CREATE TABLE public.vcg (
 ALTER TABLE public.vcg OWNER TO postgres;
 
 --
+-- TOC entry 317 (class 1259 OID 17278)
 -- Name: vci; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1550,6 +1637,7 @@ CREATE TABLE public.vci (
 ALTER TABLE public.vci OWNER TO postgres;
 
 --
+-- TOC entry 300 (class 1259 OID 17175)
 -- Name: vgc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1568,6 +1656,7 @@ CREATE TABLE public.vgc (
 ALTER TABLE public.vgc OWNER TO postgres;
 
 --
+-- TOC entry 301 (class 1259 OID 17181)
 -- Name: vhc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1586,6 +1675,7 @@ CREATE TABLE public.vhc (
 ALTER TABLE public.vhc OWNER TO postgres;
 
 --
+-- TOC entry 302 (class 1259 OID 17187)
 -- Name: vhm; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1604,6 +1694,7 @@ CREATE TABLE public.vhm (
 ALTER TABLE public.vhm OWNER TO postgres;
 
 --
+-- TOC entry 303 (class 1259 OID 17193)
 -- Name: vib; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1622,6 +1713,7 @@ CREATE TABLE public.vib (
 ALTER TABLE public.vib OWNER TO postgres;
 
 --
+-- TOC entry 304 (class 1259 OID 17199)
 -- Name: vic; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1640,6 +1732,7 @@ CREATE TABLE public.vic (
 ALTER TABLE public.vic OWNER TO postgres;
 
 --
+-- TOC entry 305 (class 1259 OID 17205)
 -- Name: vix; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1658,6 +1751,7 @@ CREATE TABLE public.vix (
 ALTER TABLE public.vix OWNER TO postgres;
 
 --
+-- TOC entry 306 (class 1259 OID 17211)
 -- Name: vjc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1676,6 +1770,7 @@ CREATE TABLE public.vjc (
 ALTER TABLE public.vjc OWNER TO postgres;
 
 --
+-- TOC entry 307 (class 1259 OID 17217)
 -- Name: vnd; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1694,6 +1789,7 @@ CREATE TABLE public.vnd (
 ALTER TABLE public.vnd OWNER TO postgres;
 
 --
+-- TOC entry 308 (class 1259 OID 17223)
 -- Name: vnm; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1712,6 +1808,7 @@ CREATE TABLE public.vnm (
 ALTER TABLE public.vnm OWNER TO postgres;
 
 --
+-- TOC entry 309 (class 1259 OID 17229)
 -- Name: vpb; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1730,6 +1827,7 @@ CREATE TABLE public.vpb (
 ALTER TABLE public.vpb OWNER TO postgres;
 
 --
+-- TOC entry 310 (class 1259 OID 17235)
 -- Name: vpi; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1748,6 +1846,7 @@ CREATE TABLE public.vpi (
 ALTER TABLE public.vpi OWNER TO postgres;
 
 --
+-- TOC entry 311 (class 1259 OID 17241)
 -- Name: vpl; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1766,6 +1865,7 @@ CREATE TABLE public.vpl (
 ALTER TABLE public.vpl OWNER TO postgres;
 
 --
+-- TOC entry 312 (class 1259 OID 17247)
 -- Name: vre; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1784,6 +1884,7 @@ CREATE TABLE public.vre (
 ALTER TABLE public.vre OWNER TO postgres;
 
 --
+-- TOC entry 313 (class 1259 OID 17253)
 -- Name: vsc; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1802,6 +1903,7 @@ CREATE TABLE public.vsc (
 ALTER TABLE public.vsc OWNER TO postgres;
 
 --
+-- TOC entry 314 (class 1259 OID 17259)
 -- Name: vtp; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1820,6 +1922,8 @@ CREATE TABLE public.vtp (
 ALTER TABLE public.vtp OWNER TO postgres;
 
 --
+-- TOC entry 5574 (class 0 OID 16814)
+-- Dependencies: 241
 -- Data for Name: acb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1852,6 +1956,8 @@ ACB	2026-01-30	23.85	24.1	23.8	24.1	15667300	1.26
 
 
 --
+-- TOC entry 5553 (class 0 OID 16687)
+-- Dependencies: 220
 -- Data for Name: anv; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1884,6 +1990,8 @@ ANV	2026-01-30	28.6	29.25	28.4	28.55	1923800	0
 
 
 --
+-- TOC entry 5554 (class 0 OID 16693)
+-- Dependencies: 221
 -- Data for Name: bcm; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1916,6 +2024,8 @@ BCM	2026-01-30	65.86	68.12	65.76	66.94	1825920	3.18
 
 
 --
+-- TOC entry 5555 (class 0 OID 16699)
+-- Dependencies: 222
 -- Data for Name: bid; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1948,6 +2058,8 @@ BID	2026-01-30	52.3	54.5	51.9	53.9	13696100	3.85
 
 
 --
+-- TOC entry 5556 (class 0 OID 16705)
+-- Dependencies: 223
 -- Data for Name: bmp; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1980,6 +2092,8 @@ BMP	2026-01-30	159.8	163	157.5	163	289300	2
 
 
 --
+-- TOC entry 5557 (class 0 OID 16711)
+-- Dependencies: 224
 -- Data for Name: bsi; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2012,6 +2126,8 @@ BSI	2026-01-30	39.5	39.5	38.85	39.2	328600	0.26
 
 
 --
+-- TOC entry 5558 (class 0 OID 16717)
+-- Dependencies: 225
 -- Data for Name: bsr; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2044,6 +2160,8 @@ BSR	2026-01-30	22.5	22.9	22.05	22.4	22201400	2.52
 
 
 --
+-- TOC entry 5559 (class 0 OID 16723)
+-- Dependencies: 226
 -- Data for Name: bvh; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2076,6 +2194,8 @@ BVH	2026-01-30	69.3	71	68.5	69.8	707100	1.01
 
 
 --
+-- TOC entry 5560 (class 0 OID 16729)
+-- Dependencies: 227
 -- Data for Name: bwe; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2108,6 +2228,8 @@ BWE	2026-01-30	45.39	45.68	44.71	45	129156	-0.22
 
 
 --
+-- TOC entry 5561 (class 0 OID 16735)
+-- Dependencies: 228
 -- Data for Name: cii; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2140,6 +2262,8 @@ CII	2026-01-30	18.2	18.8	18.2	18.45	17055900	2.22
 
 
 --
+-- TOC entry 5562 (class 0 OID 16741)
+-- Dependencies: 229
 -- Data for Name: cmg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2172,11 +2296,12 @@ CMG	2026-01-30	35.65	36.45	35.55	35.8	620400	0.7
 
 
 --
+-- TOC entry 5552 (class 0 OID 16437)
+-- Dependencies: 219
 -- Data for Name: company_info; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.company_info (symbol, icb_name2, listing_date, ceo_name) FROM stdin;
-ACB	Ngân hàng	2020-12-09	Mr. Từ Tiến Phát
 ANV	Thực phẩm và đồ uống	2007-12-07	Mr. Doãn Tới 
 BCM	Bất động sản	2020-08-31	Mr. Nguyễn Văn Hùng
 BID	Ngân hàng	2014-01-24	Mr. Phan Đức Tú
@@ -2215,7 +2340,6 @@ HCM	Dịch vụ tài chính	2009-05-19	Mr. Trịnh Hoài Giang
 HDB	Ngân hàng	2018-01-05	Mr. Nguyễn Hữu Đặng
 HDC	Bất động sản	2007-10-08	Mr. Đoàn Hữu Thuận
 HDG	Bất động sản	2010-02-02	Mr. Nguyễn Trọng Minh
-HHV	Xây dựng và Vật liệu	2022-01-20	Mr. Ngọ Trường Nam
 HPG	Tài nguyên Cơ bản	2007-11-15	Mr. Nguyễn Việt Thắng
 HSG	Tài nguyên Cơ bản	2008-12-05	Mr. Lê Phước Vũ
 HT1	Xây dựng và Vật liệu	2007-11-13	Mr, Nguyễn Quốc Thắng
@@ -2235,7 +2359,6 @@ NLG	Bất động sản	2013-04-08	Mr. Nguyễn Xuân Quang
 NT2	Điện, nước & xăng dầu khí đốt	2015-06-12	Mr. Ngô Đức Nhân
 NVL	Bất động sản	2016-12-28	Mr. Dương Văn Bắc
 OCB	Ngân hàng	2021-01-28	Mr.Trịnh Văn Tuấn 
-PAN	Thực phẩm và đồ uống	2010-12-15	Mr. Nguyễn Duy Hưng
 PC1	Xây dựng và Vật liệu	2016-11-16	Mr. Vũ Ánh Dương
 PDR	Bất động sản	2010-07-30	Mr. Nguyễn Văn Đạt
 PHR	Hóa chất	2009-08-18	Mr. Huỳnh Kim Nhựt
@@ -2274,11 +2397,16 @@ VPI	Bất động sản	2018-06-29	Mr. Tô Như Toàn
 VPL	Du lịch và Giải trí	2025-05-13	Ms. Nguyễn Thu Hằng
 VRE	Bất động sản	2017-11-06	Ms. Phạm Thị Thu Hiền
 VSC	Hàng & Dịch vụ Công nghiệp	2008-01-09	Mr. Tạ Công Thông 
+ACB	Ngân hàng	2020-12-09	Mr. Từ Tiến Phát
+HHV	Xây dựng và Vật liệu	2022-01-20	Mr. Ngọ Trường Nam
+PAN	Thực phẩm và đồ uống	2010-12-15	Mr. Nguyễn Duy Hưng
 VTP	Hàng & Dịch vụ Công nghiệp	2024-03-12	Mr. Phùng Văn Cường
 \.
 
 
 --
+-- TOC entry 5563 (class 0 OID 16747)
+-- Dependencies: 230
 -- Data for Name: ctd; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2311,6 +2439,8 @@ CTD	2026-01-30	75.9	77.6	75.6	76.8	511200	1.19
 
 
 --
+-- TOC entry 5564 (class 0 OID 16753)
+-- Dependencies: 231
 -- Data for Name: ctg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2343,6 +2473,8 @@ CTG	2026-01-30	38.2	39	37.8	38.75	28474900	1.17
 
 
 --
+-- TOC entry 5565 (class 0 OID 16759)
+-- Dependencies: 232
 -- Data for Name: ctr; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2375,6 +2507,8 @@ CTR	2026-01-30	96.1	98.7	96.1	96.7	613000	0.73
 
 
 --
+-- TOC entry 5566 (class 0 OID 16765)
+-- Dependencies: 233
 -- Data for Name: cts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2407,6 +2541,8 @@ CTS	2026-01-30	31.25	31.75	31.1	31.25	549500	0.16
 
 
 --
+-- TOC entry 5567 (class 0 OID 16771)
+-- Dependencies: 234
 -- Data for Name: dbc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2439,6 +2575,8 @@ DBC	2026-01-30	28.6	28.6	28.1	28.15	8545700	-0.53
 
 
 --
+-- TOC entry 5568 (class 0 OID 16777)
+-- Dependencies: 235
 -- Data for Name: dcm; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2471,6 +2609,8 @@ DCM	2026-01-30	37.1	37.5	36.55	36.6	4038100	-1.08
 
 
 --
+-- TOC entry 5569 (class 0 OID 16783)
+-- Dependencies: 236
 -- Data for Name: dgc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2503,6 +2643,8 @@ DGC	2026-01-30	69	71	68.2	68.6	3461500	1.18
 
 
 --
+-- TOC entry 5570 (class 0 OID 16789)
+-- Dependencies: 237
 -- Data for Name: dgw; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2535,6 +2677,8 @@ DGW	2026-01-30	48	49.5	48	49	6248100	4.14
 
 
 --
+-- TOC entry 5571 (class 0 OID 16795)
+-- Dependencies: 238
 -- Data for Name: dig; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2567,6 +2711,8 @@ DIG	2026-01-30	16.15	16.5	15.95	16.2	13135200	1.25
 
 
 --
+-- TOC entry 5572 (class 0 OID 16801)
+-- Dependencies: 239
 -- Data for Name: dpm; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2599,6 +2745,8 @@ DPM	2026-01-30	24.25	24.25	23.85	23.95	4599700	0.21
 
 
 --
+-- TOC entry 5573 (class 0 OID 16807)
+-- Dependencies: 240
 -- Data for Name: dse; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2631,6 +2779,8 @@ DSE	2026-01-30	24.3	24.6	24.25	24.55	290600	1.03
 
 
 --
+-- TOC entry 5575 (class 0 OID 16820)
+-- Dependencies: 242
 -- Data for Name: dxg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2663,6 +2813,8 @@ DXG	2026-01-30	15.25	15.6	15.15	15.4	11584600	1.32
 
 
 --
+-- TOC entry 5576 (class 0 OID 16826)
+-- Dependencies: 243
 -- Data for Name: dxs; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2695,6 +2847,8 @@ DXS	2026-01-30	7.37	7.55	7.36	7.45	1490900	1.22
 
 
 --
+-- TOC entry 5577 (class 0 OID 16832)
+-- Dependencies: 244
 -- Data for Name: eib; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2727,6 +2881,8 @@ EIB	2026-01-30	21.2	21.2	20.7	20.85	9228500	-0.48
 
 
 --
+-- TOC entry 5578 (class 0 OID 16838)
+-- Dependencies: 245
 -- Data for Name: evf; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2759,6 +2915,8 @@ EVF	2026-01-30	11.65	11.75	11.5	11.55	4281600	-0.86
 
 
 --
+-- TOC entry 5579 (class 0 OID 16844)
+-- Dependencies: 246
 -- Data for Name: fpt; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2791,6 +2949,8 @@ FPT	2026-01-30	106.4	106.4	103.9	104.5	10833200	-1.51
 
 
 --
+-- TOC entry 5580 (class 0 OID 16850)
+-- Dependencies: 247
 -- Data for Name: frt; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2823,6 +2983,8 @@ FRT	2026-01-30	168.9	171	165	169.9	998500	2.97
 
 
 --
+-- TOC entry 5581 (class 0 OID 16856)
+-- Dependencies: 248
 -- Data for Name: fts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2855,6 +3017,8 @@ FTS	2026-01-30	32.6	33.05	32.4	32.9	1120300	0.92
 
 
 --
+-- TOC entry 5582 (class 0 OID 16862)
+-- Dependencies: 249
 -- Data for Name: gas; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2887,6 +3051,8 @@ GAS	2026-01-30	116.8	122	115.8	117	3644900	0.17
 
 
 --
+-- TOC entry 5583 (class 0 OID 16868)
+-- Dependencies: 250
 -- Data for Name: gee; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2919,6 +3085,8 @@ GEE	2026-01-30	187	187	179.2	180.8	210200	-2.8
 
 
 --
+-- TOC entry 5584 (class 0 OID 16874)
+-- Dependencies: 251
 -- Data for Name: gex; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2951,6 +3119,8 @@ GEX	2026-01-30	37.1	37.3	36.25	36.7	7438900	0.55
 
 
 --
+-- TOC entry 5585 (class 0 OID 16880)
+-- Dependencies: 252
 -- Data for Name: gmd; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2983,6 +3153,8 @@ GMD	2026-01-30	68	70	67	68.5	1901300	0.88
 
 
 --
+-- TOC entry 5586 (class 0 OID 16886)
+-- Dependencies: 253
 -- Data for Name: gvr; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3015,6 +3187,8 @@ GVR	2026-01-30	40.85	41.8	39.65	39.85	6315900	-2.45
 
 
 --
+-- TOC entry 5587 (class 0 OID 16892)
+-- Dependencies: 254
 -- Data for Name: hag; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3047,6 +3221,8 @@ HAG	2026-01-30	17.1	17.25	16.95	17.25	3821300	0.88
 
 
 --
+-- TOC entry 5588 (class 0 OID 16898)
+-- Dependencies: 255
 -- Data for Name: hcm; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3079,6 +3255,8 @@ HCM	2026-01-30	23.31	23.4	23.11	23.16	10288031	-0.22
 
 
 --
+-- TOC entry 5589 (class 0 OID 16904)
+-- Dependencies: 256
 -- Data for Name: hdb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3111,6 +3289,8 @@ HDB	2026-01-30	27.9	28.4	27.8	28.3	15990600	1.62
 
 
 --
+-- TOC entry 5590 (class 0 OID 16910)
+-- Dependencies: 257
 -- Data for Name: hdc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3143,6 +3323,8 @@ HDC	2026-01-30	21.6	22.15	21.5	21.7	4243100	1.64
 
 
 --
+-- TOC entry 5591 (class 0 OID 16916)
+-- Dependencies: 258
 -- Data for Name: hdg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3175,6 +3357,8 @@ HDG	2026-01-30	26.07	27.2	26.07	26.96	5365124	4.01
 
 
 --
+-- TOC entry 5592 (class 0 OID 16922)
+-- Dependencies: 259
 -- Data for Name: hhv; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3207,6 +3391,8 @@ HHV	2026-01-30	12.2	12.3	12.15	12.2	4458200	0
 
 
 --
+-- TOC entry 5593 (class 0 OID 16928)
+-- Dependencies: 260
 -- Data for Name: hpg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3239,6 +3425,8 @@ HPG	2026-01-30	27.3	27.5	26.75	26.8	40558400	-1.11
 
 
 --
+-- TOC entry 5648 (class 0 OID 17266)
+-- Dependencies: 315
 -- Data for Name: hsg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3271,6 +3459,8 @@ HSG	2026-01-30	16.35	16.5	16.1	16.1	1957400	-0.92
 
 
 --
+-- TOC entry 5594 (class 0 OID 16934)
+-- Dependencies: 261
 -- Data for Name: ht1; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3303,6 +3493,8 @@ HT1	2026-01-30	15.15	15.15	14.75	14.85	825700	0
 
 
 --
+-- TOC entry 5595 (class 0 OID 16940)
+-- Dependencies: 262
 -- Data for Name: imp; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3335,6 +3527,8 @@ IMP	2026-01-30	53.8	54.3	53.8	54.2	51500	0.74
 
 
 --
+-- TOC entry 5596 (class 0 OID 16946)
+-- Dependencies: 263
 -- Data for Name: kbc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3367,6 +3561,8 @@ KBC	2026-01-30	34	35	33.8	34.9	4796300	3.87
 
 
 --
+-- TOC entry 5597 (class 0 OID 16952)
+-- Dependencies: 264
 -- Data for Name: kdc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3399,6 +3595,8 @@ KDC	2026-01-30	49.95	50	49.65	50	188600	0
 
 
 --
+-- TOC entry 5598 (class 0 OID 16958)
+-- Dependencies: 265
 -- Data for Name: kdh; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3431,6 +3629,8 @@ KDH	2026-01-30	27.1	28	26.85	27.5	11299600	2.23
 
 
 --
+-- TOC entry 5599 (class 0 OID 16964)
+-- Dependencies: 266
 -- Data for Name: kos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3463,6 +3663,8 @@ KOS	2026-01-30	39.2	39.2	39	39.15	361400	0
 
 
 --
+-- TOC entry 5600 (class 0 OID 16970)
+-- Dependencies: 267
 -- Data for Name: lpb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3495,6 +3697,8 @@ LPB	2026-01-30	41.9	42.6	41.5	41.65	1478700	-0.12
 
 
 --
+-- TOC entry 5601 (class 0 OID 16976)
+-- Dependencies: 268
 -- Data for Name: mbb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3527,6 +3731,8 @@ MBB	2026-01-30	26.75	27.2	26.6	27.2	28064600	1.87
 
 
 --
+-- TOC entry 5602 (class 0 OID 16982)
+-- Dependencies: 269
 -- Data for Name: msb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3559,6 +3765,8 @@ MSB	2026-01-30	12.2	12.4	12.2	12.4	5283700	2.06
 
 
 --
+-- TOC entry 5603 (class 0 OID 16988)
+-- Dependencies: 270
 -- Data for Name: msn; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3591,6 +3799,8 @@ MSN	2026-01-30	84.6	85	83.3	84	10777800	-0.12
 
 
 --
+-- TOC entry 5604 (class 0 OID 16994)
+-- Dependencies: 271
 -- Data for Name: mwg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3623,6 +3833,8 @@ MWG	2026-01-30	90	93.4	89.8	92.9	20845900	3.8
 
 
 --
+-- TOC entry 5605 (class 0 OID 17000)
+-- Dependencies: 272
 -- Data for Name: nab; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3655,6 +3867,8 @@ NAB	2026-01-30	14.15	14.25	14.1	14.15	1230700	0.35
 
 
 --
+-- TOC entry 5606 (class 0 OID 17006)
+-- Dependencies: 273
 -- Data for Name: nkg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3687,6 +3901,8 @@ NKG	2026-01-30	15.45	15.7	15.2	15.2	3550700	-0.65
 
 
 --
+-- TOC entry 5607 (class 0 OID 17012)
+-- Dependencies: 274
 -- Data for Name: nlg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3719,6 +3935,8 @@ NLG	2026-01-30	28.9	29.45	28.65	29.45	3032700	3.51
 
 
 --
+-- TOC entry 5608 (class 0 OID 17018)
+-- Dependencies: 275
 -- Data for Name: nt2; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3751,6 +3969,8 @@ NT2	2026-01-30	26.4	26.7	26.15	26.3	950100	0.19
 
 
 --
+-- TOC entry 5609 (class 0 OID 17024)
+-- Dependencies: 276
 -- Data for Name: nvl; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3783,6 +4003,8 @@ NVL	2026-01-30	12.3	13	12.15	13	13138500	7
 
 
 --
+-- TOC entry 5610 (class 0 OID 17030)
+-- Dependencies: 277
 -- Data for Name: ocb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3815,6 +4037,8 @@ OCB	2026-01-30	11.8	11.85	11.7	11.8	1483400	0.85
 
 
 --
+-- TOC entry 5611 (class 0 OID 17036)
+-- Dependencies: 278
 -- Data for Name: pan; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3847,6 +4071,8 @@ PAN	2026-01-30	29.7	30.1	29.45	29.8	776900	0.34
 
 
 --
+-- TOC entry 5612 (class 0 OID 17042)
+-- Dependencies: 279
 -- Data for Name: pc1; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3879,6 +4105,8 @@ PC1	2026-01-30	24.6	24.95	24.2	24.2	8072600	0.83
 
 
 --
+-- TOC entry 5613 (class 0 OID 17048)
+-- Dependencies: 280
 -- Data for Name: pdr; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3911,6 +4139,8 @@ PDR	2026-01-30	17.5	17.95	17.35	17.7	10651800	2.31
 
 
 --
+-- TOC entry 5649 (class 0 OID 17272)
+-- Dependencies: 316
 -- Data for Name: phr; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3943,6 +4173,8 @@ PHR	2026-01-30	63.1	64.9	62.2	64.3	763700	3.71
 
 
 --
+-- TOC entry 5614 (class 0 OID 17054)
+-- Dependencies: 281
 -- Data for Name: plx; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -3975,6 +4207,8 @@ PLX	2026-01-30	58.4	59.5	57.7	58.9	6913800	2.08
 
 
 --
+-- TOC entry 5615 (class 0 OID 17061)
+-- Dependencies: 282
 -- Data for Name: pnj; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4007,6 +4241,8 @@ PNJ	2026-01-30	124.8	127	121.5	127	3736300	0.4
 
 
 --
+-- TOC entry 5616 (class 0 OID 17067)
+-- Dependencies: 283
 -- Data for Name: pow; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4039,6 +4275,8 @@ POW	2026-01-30	13.55	13.85	13.5	13.75	13390500	2.61
 
 
 --
+-- TOC entry 5617 (class 0 OID 17073)
+-- Dependencies: 284
 -- Data for Name: pvd; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4071,6 +4309,8 @@ PVD	2026-01-30	30.55	31.7	30.2	31	13853100	3.33
 
 
 --
+-- TOC entry 5618 (class 0 OID 17079)
+-- Dependencies: 285
 -- Data for Name: pvt; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4103,6 +4343,8 @@ PVT	2026-01-30	20.8	21.4	20.7	20.75	4639700	1.22
 
 
 --
+-- TOC entry 5619 (class 0 OID 17085)
+-- Dependencies: 286
 -- Data for Name: ree; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4135,6 +4377,8 @@ REE	2026-01-30	61.41	61.51	60.82	61.11	741542	0.16
 
 
 --
+-- TOC entry 5620 (class 0 OID 17091)
+-- Dependencies: 287
 -- Data for Name: sab; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4167,6 +4411,8 @@ SAB	2026-01-30	51	51.4	49.9	49.9	1724800	-0.8
 
 
 --
+-- TOC entry 5621 (class 0 OID 17097)
+-- Dependencies: 288
 -- Data for Name: sbt; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4199,6 +4445,8 @@ SBT	2026-01-30	24	24.05	23.05	23.9	721700	-0.42
 
 
 --
+-- TOC entry 5622 (class 0 OID 17103)
+-- Dependencies: 289
 -- Data for Name: scs; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4231,6 +4479,8 @@ SCS	2026-01-30	54.8	55.3	54.5	54.5	174000	0.18
 
 
 --
+-- TOC entry 5623 (class 0 OID 17109)
+-- Dependencies: 290
 -- Data for Name: shb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4263,6 +4513,8 @@ SHB	2026-01-30	15.9	16.2	15.8	16	53345400	0.31
 
 
 --
+-- TOC entry 5624 (class 0 OID 17115)
+-- Dependencies: 291
 -- Data for Name: sip; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4295,6 +4547,8 @@ SIP	2026-01-30	59.1	61.7	59.1	61	1722900	4.1
 
 
 --
+-- TOC entry 5625 (class 0 OID 17121)
+-- Dependencies: 292
 -- Data for Name: sjs; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4327,6 +4581,8 @@ SJS	2026-01-30	53.2	53.2	50.5	52	81200	-2.99
 
 
 --
+-- TOC entry 5626 (class 0 OID 17127)
+-- Dependencies: 293
 -- Data for Name: ssb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4359,11 +4615,79 @@ SSB	2026-01-30	17.4	17.5	17.15	17.15	2376700	-1.72
 
 
 --
+-- TOC entry 5651 (class 0 OID 18492)
+-- Dependencies: 318
 -- Data for Name: ssi; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.ssi (symbol, "time", open, high, low, close, volume, percent_change) FROM stdin;
-SSI	2025-12-26	30.25	31.25	29.75	30.75	31205200	0
+SSI	2025-09-25	35.98	36.12	35.53	35.53	26015893	0
+SSI	2025-09-26	35.43	35.48	34.61	34.61	38873142	-2.59
+SSI	2025-09-29	34.66	34.8	33.89	34.2	34435201	-1.18
+SSI	2025-09-30	34.25	35.34	33.98	35.12	38252127	2.69
+SSI	2025-10-01	35.39	35.71	35.02	35.16	16981130	0.11
+SSI	2025-10-02	35.21	35.48	34.34	34.48	21173988	-1.93
+SSI	2025-10-03	34.39	34.8	33.89	34.3	25075269	-0.52
+SSI	2025-10-06	35.07	36.66	35.02	36.66	53551974	6.88
+SSI	2025-10-07	37.35	37.67	36.94	37.16	40573532	1.36
+SSI	2025-10-08	38.03	38.71	36.94	37.53	53783538	1
+SSI	2025-10-09	37.57	37.62	36.94	37.03	33479352	-1.33
+SSI	2025-10-10	37.26	37.8	36.98	37.07	29045560	0.11
+SSI	2025-10-13	36.57	37.98	36.44	37.67	42293142	1.62
+SSI	2025-10-14	38.58	39.44	37.35	37.35	65318592	-0.85
+SSI	2025-10-15	37.44	38.03	37.21	37.76	30134761	1.1
+SSI	2025-10-16	37.98	38.49	37.48	37.67	29782632	-0.24
+SSI	2025-10-17	37.8	38.21	37.07	37.16	38994147	-1.35
+SSI	2025-10-20	37.12	38.08	34.57	34.57	70627248	-6.97
+SSI	2025-10-21	34.57	35.98	33.66	35.16	81234490	1.71
+SSI	2025-10-22	35.34	35.34	33.89	35.02	32824521	-0.4
+SSI	2025-10-23	35.07	35.21	34.16	34.16	24303029	-2.46
+SSI	2025-10-24	33.89	34.07	32.52	32.79	82117726	-4.01
+SSI	2025-10-27	33.16	33.29	31.47	31.7	71186329	-3.32
+SSI	2025-10-28	31.61	32.79	31.61	32.66	34496457	3.03
+SSI	2025-10-29	32.75	32.97	32.43	32.43	22919550	-0.7
+SSI	2025-10-30	32.47	32.66	31.7	31.74	28059380	-2.13
+SSI	2025-10-31	31.65	32.11	31.24	31.24	26797881	-1.58
+SSI	2025-11-03	31.24	31.47	29.6	29.6	50058055	-5.25
+SSI	2025-11-04	29.51	31.65	29.24	31.65	57869584	6.93
+SSI	2025-11-05	31.7	32.34	31.65	31.79	30083711	0.44
+SSI	2025-11-06	31.88	31.93	31.02	31.24	23201799	-1.73
+SSI	2025-11-07	31.11	31.15	29.92	30.01	36706977	-3.94
+SSI	2025-11-10	30.01	31.74	29.83	30.61	33054484	2
+SSI	2025-11-11	31.06	31.84	30.7	31.74	30234068	3.69
+SSI	2025-11-12	31.97	32.66	31.7	32.34	34991321	1.89
+SSI	2025-11-13	32.38	32.38	31.7	31.84	21331238	-1.55
+SSI	2025-11-14	31.7	32.2	31.52	31.84	19645683	0
+SSI	2025-11-17	31.88	32.29	31.74	32.25	15968861	1.29
+SSI	2025-11-18	32.29	32.75	32.06	32.38	25631078	0.4
+SSI	2025-11-19	32.25	32.29	31.29	31.56	23287948	-2.53
+SSI	2025-11-20	31.56	31.84	31.11	31.7	21077879	0.44
+SSI	2025-11-21	31.24	31.47	31.02	31.24	18457074	-1.45
+SSI	2025-11-24	31.52	31.79	31.24	31.33	11842375	0.29
+SSI	2025-11-25	31.11	31.24	29.7	29.92	53067162	-4.5
+SSI	2025-11-26	30.06	31.02	30.01	30.97	36055500	3.51
+SSI	2025-11-27	30.83	31.11	30.2	30.24	20124958	-2.36
+SSI	2025-11-28	30.2	30.47	29.65	29.88	25495781	-1.19
+SSI	2025-12-01	30.06	30.2	29.15	29.15	28422573	-2.44
+SSI	2025-12-02	28.88	29.56	28.88	29.42	31360501	0.93
+SSI	2025-12-03	29.51	29.65	29.29	29.47	22062896	0.17
+SSI	2025-12-04	29.65	30.2	29.6	29.88	32042559	1.39
+SSI	2025-12-05	30.01	30.06	29.33	29.38	47121669	-1.67
+SSI	2025-12-08	30	30.45	29.4	29.4	31978876	0.07
+SSI	2025-12-09	29.35	29.4	28.4	28.75	30873662	-2.21
+SSI	2025-12-10	29	29.3	28.9	29.25	12156834	1.74
+SSI	2025-12-11	29.35	29.7	28.95	29.05	11703357	-0.68
+SSI	2025-12-12	29.3	29.4	28	28.1	21578889	-3.27
+SSI	2025-12-15	28.05	28.85	28.05	28.4	18682264	1.07
+SSI	2025-12-16	28.6	30.35	28	30.25	32125451	6.51
+SSI	2025-12-17	30	30.1	29.6	29.65	13690018	-1.98
+SSI	2025-12-18	29.65	30.1	29.35	29.85	16290583	0.67
+SSI	2025-12-19	30	30.95	29.85	30.8	42628200	3.18
+SSI	2025-12-22	30.9	31.5	30.55	31.45	29655000	2.11
+SSI	2025-12-23	31.45	31.6	30.65	30.8	26174900	-2.07
+SSI	2025-12-24	30.7	31.35	30.4	31.35	22076900	1.79
+SSI	2025-12-25	31.35	31.6	30.5	30.5	16892800	-2.71
+SSI	2025-12-26	30.25	31.25	29.75	30.75	31205200	0.82
 SSI	2025-12-29	30.8	30.95	30.4	30.5	11999500	-0.81
 SSI	2025-12-30	30.5	30.8	30.3	30.6	11165800	0.33
 SSI	2025-12-31	30.65	30.9	30.2	30.25	13612800	-1.14
@@ -4391,6 +4715,8 @@ SSI	2026-01-30	31.2	31.6	31.1	31.15	18979800	0
 
 
 --
+-- TOC entry 5627 (class 0 OID 17139)
+-- Dependencies: 294
 -- Data for Name: stb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4423,6 +4749,8 @@ STB	2026-01-30	62.8	65	62.7	63	9372100	0.32
 
 
 --
+-- TOC entry 5628 (class 0 OID 17145)
+-- Dependencies: 295
 -- Data for Name: szc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4455,6 +4783,8 @@ SZC	2026-01-30	31.5	32.8	31.5	32.2	1475400	2.88
 
 
 --
+-- TOC entry 5629 (class 0 OID 17151)
+-- Dependencies: 296
 -- Data for Name: tch; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4487,6 +4817,8 @@ TCH	2026-01-30	15.5	15.7	15.15	15.7	7576700	1.62
 
 
 --
+-- TOC entry 5630 (class 0 OID 17157)
+-- Dependencies: 297
 -- Data for Name: tpb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4519,6 +4851,8 @@ TPB	2026-01-30	16.8	17.2	16.65	17.2	6437600	2.99
 
 
 --
+-- TOC entry 5631 (class 0 OID 17163)
+-- Dependencies: 298
 -- Data for Name: vcb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4551,6 +4885,8 @@ VCB	2026-01-30	70.6	71.9	69.6	70.5	11480700	1
 
 
 --
+-- TOC entry 5632 (class 0 OID 17169)
+-- Dependencies: 299
 -- Data for Name: vcg; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4583,6 +4919,8 @@ VCG	2026-01-30	18.95	19.45	18.85	19.15	7761900	0.79
 
 
 --
+-- TOC entry 5650 (class 0 OID 17278)
+-- Dependencies: 317
 -- Data for Name: vci; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4615,6 +4953,8 @@ VCI	2026-01-30	36.15	36.65	36	36.65	9459900	1.38
 
 
 --
+-- TOC entry 5633 (class 0 OID 17175)
+-- Dependencies: 300
 -- Data for Name: vgc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4647,6 +4987,8 @@ VGC	2026-01-30	47.05	50.1	47.05	50.1	4140800	6.82
 
 
 --
+-- TOC entry 5634 (class 0 OID 17181)
+-- Dependencies: 301
 -- Data for Name: vhc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4679,6 +5021,8 @@ VHC	2026-01-30	64.7	65.6	64.3	64.7	1548000	-0.46
 
 
 --
+-- TOC entry 5635 (class 0 OID 17187)
+-- Dependencies: 302
 -- Data for Name: vhm; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4711,6 +5055,8 @@ VHM	2026-01-30	107	107.4	104	106	4714200	-0.93
 
 
 --
+-- TOC entry 5636 (class 0 OID 17193)
+-- Dependencies: 303
 -- Data for Name: vib; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4743,6 +5089,8 @@ VIB	2026-01-30	17.5	17.8	17.45	17.8	6710600	1.71
 
 
 --
+-- TOC entry 5637 (class 0 OID 17199)
+-- Dependencies: 304
 -- Data for Name: vic; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4775,6 +5123,8 @@ VIC	2026-01-30	140.5	141.9	135.9	140.5	6881400	0
 
 
 --
+-- TOC entry 5638 (class 0 OID 17205)
+-- Dependencies: 305
 -- Data for Name: vix; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4807,6 +5157,8 @@ VIX	2026-01-30	18.71	19.17	18.28	19.09	29059127	2.74
 
 
 --
+-- TOC entry 5639 (class 0 OID 17211)
+-- Dependencies: 306
 -- Data for Name: vjc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4839,6 +5191,8 @@ VJC	2026-01-30	164.3	170.5	159.4	170.5	1696000	3.96
 
 
 --
+-- TOC entry 5640 (class 0 OID 17217)
+-- Dependencies: 307
 -- Data for Name: vnd; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4871,6 +5225,8 @@ VND	2026-01-30	18.45	18.7	18.4	18.5	10447600	0.27
 
 
 --
+-- TOC entry 5641 (class 0 OID 17223)
+-- Dependencies: 308
 -- Data for Name: vnm; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4903,6 +5259,8 @@ VNM	2026-01-30	71.5	72.5	70.5	70.6	7844800	-0.7
 
 
 --
+-- TOC entry 5642 (class 0 OID 17229)
+-- Dependencies: 309
 -- Data for Name: vpb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4935,6 +5293,8 @@ VPB	2026-01-30	27.75	28	27.55	28	15839700	1.27
 
 
 --
+-- TOC entry 5643 (class 0 OID 17235)
+-- Dependencies: 310
 -- Data for Name: vpi; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4967,6 +5327,8 @@ VPI	2026-01-30	52.3	54.1	52.2	53.9	1869800	1.7
 
 
 --
+-- TOC entry 5644 (class 0 OID 17241)
+-- Dependencies: 311
 -- Data for Name: vpl; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4999,6 +5361,8 @@ VPL	2026-01-30	93	93.2	90.9	92.5	783500	0.54
 
 
 --
+-- TOC entry 5645 (class 0 OID 17247)
+-- Dependencies: 312
 -- Data for Name: vre; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -5031,6 +5395,8 @@ VRE	2026-01-30	29.9	30.2	29.5	30.2	6955000	0.67
 
 
 --
+-- TOC entry 5646 (class 0 OID 17253)
+-- Dependencies: 313
 -- Data for Name: vsc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -5063,6 +5429,8 @@ VSC	2026-01-30	20.7	21.05	20.55	20.6	5121600	0.24
 
 
 --
+-- TOC entry 5647 (class 0 OID 17259)
+-- Dependencies: 314
 -- Data for Name: vtp; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -5095,6 +5463,7 @@ VTP	2026-01-30	111.4	113.7	111.1	111.2	974600	-0.18
 
 
 --
+-- TOC entry 5250 (class 2606 OID 16819)
 -- Name: acb acb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5103,6 +5472,7 @@ ALTER TABLE ONLY public.acb
 
 
 --
+-- TOC entry 5208 (class 2606 OID 16692)
 -- Name: anv anv_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5111,6 +5481,7 @@ ALTER TABLE ONLY public.anv
 
 
 --
+-- TOC entry 5210 (class 2606 OID 16698)
 -- Name: bcm bcm_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5119,6 +5490,7 @@ ALTER TABLE ONLY public.bcm
 
 
 --
+-- TOC entry 5212 (class 2606 OID 16704)
 -- Name: bid bid_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5127,6 +5499,7 @@ ALTER TABLE ONLY public.bid
 
 
 --
+-- TOC entry 5214 (class 2606 OID 16710)
 -- Name: bmp bmp_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5135,6 +5508,7 @@ ALTER TABLE ONLY public.bmp
 
 
 --
+-- TOC entry 5216 (class 2606 OID 16716)
 -- Name: bsi bsi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5143,6 +5517,7 @@ ALTER TABLE ONLY public.bsi
 
 
 --
+-- TOC entry 5218 (class 2606 OID 16722)
 -- Name: bsr bsr_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5151,6 +5526,7 @@ ALTER TABLE ONLY public.bsr
 
 
 --
+-- TOC entry 5220 (class 2606 OID 16728)
 -- Name: bvh bvh_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5159,6 +5535,7 @@ ALTER TABLE ONLY public.bvh
 
 
 --
+-- TOC entry 5222 (class 2606 OID 16734)
 -- Name: bwe bwe_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5167,6 +5544,7 @@ ALTER TABLE ONLY public.bwe
 
 
 --
+-- TOC entry 5224 (class 2606 OID 16740)
 -- Name: cii cii_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5175,6 +5553,7 @@ ALTER TABLE ONLY public.cii
 
 
 --
+-- TOC entry 5226 (class 2606 OID 16746)
 -- Name: cmg cmg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5183,6 +5562,7 @@ ALTER TABLE ONLY public.cmg
 
 
 --
+-- TOC entry 5206 (class 2606 OID 16444)
 -- Name: company_info company_info_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5191,6 +5571,7 @@ ALTER TABLE ONLY public.company_info
 
 
 --
+-- TOC entry 5228 (class 2606 OID 16752)
 -- Name: ctd ctd_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5199,6 +5580,7 @@ ALTER TABLE ONLY public.ctd
 
 
 --
+-- TOC entry 5230 (class 2606 OID 16758)
 -- Name: ctg ctg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5207,6 +5589,7 @@ ALTER TABLE ONLY public.ctg
 
 
 --
+-- TOC entry 5232 (class 2606 OID 16764)
 -- Name: ctr ctr_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5215,6 +5598,7 @@ ALTER TABLE ONLY public.ctr
 
 
 --
+-- TOC entry 5234 (class 2606 OID 16770)
 -- Name: cts cts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5223,6 +5607,7 @@ ALTER TABLE ONLY public.cts
 
 
 --
+-- TOC entry 5236 (class 2606 OID 16776)
 -- Name: dbc dbc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5231,6 +5616,7 @@ ALTER TABLE ONLY public.dbc
 
 
 --
+-- TOC entry 5238 (class 2606 OID 16782)
 -- Name: dcm dcm_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5239,6 +5625,7 @@ ALTER TABLE ONLY public.dcm
 
 
 --
+-- TOC entry 5240 (class 2606 OID 16788)
 -- Name: dgc dgc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5247,6 +5634,7 @@ ALTER TABLE ONLY public.dgc
 
 
 --
+-- TOC entry 5242 (class 2606 OID 16794)
 -- Name: dgw dgw_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5255,6 +5643,7 @@ ALTER TABLE ONLY public.dgw
 
 
 --
+-- TOC entry 5244 (class 2606 OID 16800)
 -- Name: dig dig_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5263,6 +5652,7 @@ ALTER TABLE ONLY public.dig
 
 
 --
+-- TOC entry 5246 (class 2606 OID 16806)
 -- Name: dpm dpm_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5271,6 +5661,7 @@ ALTER TABLE ONLY public.dpm
 
 
 --
+-- TOC entry 5248 (class 2606 OID 16812)
 -- Name: dse dse_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5279,6 +5670,7 @@ ALTER TABLE ONLY public.dse
 
 
 --
+-- TOC entry 5252 (class 2606 OID 16825)
 -- Name: dxg dxg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5287,6 +5679,7 @@ ALTER TABLE ONLY public.dxg
 
 
 --
+-- TOC entry 5254 (class 2606 OID 16831)
 -- Name: dxs dxs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5295,6 +5688,7 @@ ALTER TABLE ONLY public.dxs
 
 
 --
+-- TOC entry 5256 (class 2606 OID 16837)
 -- Name: eib eib_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5303,6 +5697,7 @@ ALTER TABLE ONLY public.eib
 
 
 --
+-- TOC entry 5258 (class 2606 OID 16843)
 -- Name: evf evf_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5311,6 +5706,7 @@ ALTER TABLE ONLY public.evf
 
 
 --
+-- TOC entry 5260 (class 2606 OID 16849)
 -- Name: fpt fpt_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5319,6 +5715,7 @@ ALTER TABLE ONLY public.fpt
 
 
 --
+-- TOC entry 5262 (class 2606 OID 16855)
 -- Name: frt frt_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5327,6 +5724,7 @@ ALTER TABLE ONLY public.frt
 
 
 --
+-- TOC entry 5264 (class 2606 OID 16861)
 -- Name: fts fts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5335,6 +5733,7 @@ ALTER TABLE ONLY public.fts
 
 
 --
+-- TOC entry 5266 (class 2606 OID 16867)
 -- Name: gas gas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5343,6 +5742,7 @@ ALTER TABLE ONLY public.gas
 
 
 --
+-- TOC entry 5268 (class 2606 OID 16873)
 -- Name: gee gee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5351,6 +5751,7 @@ ALTER TABLE ONLY public.gee
 
 
 --
+-- TOC entry 5270 (class 2606 OID 16879)
 -- Name: gex gex_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5359,6 +5760,7 @@ ALTER TABLE ONLY public.gex
 
 
 --
+-- TOC entry 5272 (class 2606 OID 16885)
 -- Name: gmd gmd_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5367,6 +5769,7 @@ ALTER TABLE ONLY public.gmd
 
 
 --
+-- TOC entry 5274 (class 2606 OID 16891)
 -- Name: gvr gvr_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5375,6 +5778,7 @@ ALTER TABLE ONLY public.gvr
 
 
 --
+-- TOC entry 5276 (class 2606 OID 16897)
 -- Name: hag hag_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5383,6 +5787,7 @@ ALTER TABLE ONLY public.hag
 
 
 --
+-- TOC entry 5278 (class 2606 OID 16903)
 -- Name: hcm hcm_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5391,6 +5796,7 @@ ALTER TABLE ONLY public.hcm
 
 
 --
+-- TOC entry 5280 (class 2606 OID 16909)
 -- Name: hdb hdb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5399,6 +5805,7 @@ ALTER TABLE ONLY public.hdb
 
 
 --
+-- TOC entry 5282 (class 2606 OID 16915)
 -- Name: hdc hdc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5407,6 +5814,7 @@ ALTER TABLE ONLY public.hdc
 
 
 --
+-- TOC entry 5284 (class 2606 OID 16921)
 -- Name: hdg hdg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5415,6 +5823,7 @@ ALTER TABLE ONLY public.hdg
 
 
 --
+-- TOC entry 5286 (class 2606 OID 16927)
 -- Name: hhv hhv_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5423,6 +5832,7 @@ ALTER TABLE ONLY public.hhv
 
 
 --
+-- TOC entry 5288 (class 2606 OID 16933)
 -- Name: hpg hpg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5431,6 +5841,7 @@ ALTER TABLE ONLY public.hpg
 
 
 --
+-- TOC entry 5398 (class 2606 OID 17271)
 -- Name: hsg hsg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5439,6 +5850,7 @@ ALTER TABLE ONLY public.hsg
 
 
 --
+-- TOC entry 5290 (class 2606 OID 16939)
 -- Name: ht1 ht1_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5447,6 +5859,7 @@ ALTER TABLE ONLY public.ht1
 
 
 --
+-- TOC entry 5292 (class 2606 OID 16945)
 -- Name: imp imp_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5455,6 +5868,7 @@ ALTER TABLE ONLY public.imp
 
 
 --
+-- TOC entry 5294 (class 2606 OID 16951)
 -- Name: kbc kbc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5463,6 +5877,7 @@ ALTER TABLE ONLY public.kbc
 
 
 --
+-- TOC entry 5296 (class 2606 OID 16957)
 -- Name: kdc kdc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5471,6 +5886,7 @@ ALTER TABLE ONLY public.kdc
 
 
 --
+-- TOC entry 5298 (class 2606 OID 16963)
 -- Name: kdh kdh_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5479,6 +5895,7 @@ ALTER TABLE ONLY public.kdh
 
 
 --
+-- TOC entry 5300 (class 2606 OID 16969)
 -- Name: kos kos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5487,6 +5904,7 @@ ALTER TABLE ONLY public.kos
 
 
 --
+-- TOC entry 5302 (class 2606 OID 16975)
 -- Name: lpb lpb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5495,6 +5913,7 @@ ALTER TABLE ONLY public.lpb
 
 
 --
+-- TOC entry 5304 (class 2606 OID 16981)
 -- Name: mbb mbb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5503,6 +5922,7 @@ ALTER TABLE ONLY public.mbb
 
 
 --
+-- TOC entry 5306 (class 2606 OID 16987)
 -- Name: msb msb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5511,6 +5931,7 @@ ALTER TABLE ONLY public.msb
 
 
 --
+-- TOC entry 5308 (class 2606 OID 16993)
 -- Name: msn msn_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5519,6 +5940,7 @@ ALTER TABLE ONLY public.msn
 
 
 --
+-- TOC entry 5310 (class 2606 OID 16999)
 -- Name: mwg mwg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5527,6 +5949,7 @@ ALTER TABLE ONLY public.mwg
 
 
 --
+-- TOC entry 5312 (class 2606 OID 17005)
 -- Name: nab nab_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5535,6 +5958,7 @@ ALTER TABLE ONLY public.nab
 
 
 --
+-- TOC entry 5314 (class 2606 OID 17011)
 -- Name: nkg nkg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5543,6 +5967,7 @@ ALTER TABLE ONLY public.nkg
 
 
 --
+-- TOC entry 5316 (class 2606 OID 17017)
 -- Name: nlg nlg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5551,6 +5976,7 @@ ALTER TABLE ONLY public.nlg
 
 
 --
+-- TOC entry 5318 (class 2606 OID 17023)
 -- Name: nt2 nt2_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5559,6 +5985,7 @@ ALTER TABLE ONLY public.nt2
 
 
 --
+-- TOC entry 5320 (class 2606 OID 17029)
 -- Name: nvl nvl_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5567,6 +5994,7 @@ ALTER TABLE ONLY public.nvl
 
 
 --
+-- TOC entry 5322 (class 2606 OID 17035)
 -- Name: ocb ocb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5575,6 +6003,7 @@ ALTER TABLE ONLY public.ocb
 
 
 --
+-- TOC entry 5324 (class 2606 OID 17041)
 -- Name: pan pan_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5583,6 +6012,7 @@ ALTER TABLE ONLY public.pan
 
 
 --
+-- TOC entry 5326 (class 2606 OID 17047)
 -- Name: pc1 pc1_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5591,6 +6021,7 @@ ALTER TABLE ONLY public.pc1
 
 
 --
+-- TOC entry 5328 (class 2606 OID 17053)
 -- Name: pdr pdr_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5599,6 +6030,7 @@ ALTER TABLE ONLY public.pdr
 
 
 --
+-- TOC entry 5400 (class 2606 OID 17277)
 -- Name: phr phr_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5607,6 +6039,7 @@ ALTER TABLE ONLY public.phr
 
 
 --
+-- TOC entry 5330 (class 2606 OID 17059)
 -- Name: plx plx_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5615,6 +6048,7 @@ ALTER TABLE ONLY public.plx
 
 
 --
+-- TOC entry 5332 (class 2606 OID 17066)
 -- Name: pnj pnj_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5623,6 +6057,7 @@ ALTER TABLE ONLY public.pnj
 
 
 --
+-- TOC entry 5334 (class 2606 OID 17072)
 -- Name: pow pow_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5631,6 +6066,7 @@ ALTER TABLE ONLY public.pow
 
 
 --
+-- TOC entry 5336 (class 2606 OID 17078)
 -- Name: pvd pvd_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5639,6 +6075,7 @@ ALTER TABLE ONLY public.pvd
 
 
 --
+-- TOC entry 5338 (class 2606 OID 17084)
 -- Name: pvt pvt_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5647,6 +6084,7 @@ ALTER TABLE ONLY public.pvt
 
 
 --
+-- TOC entry 5340 (class 2606 OID 17090)
 -- Name: ree ree_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5655,6 +6093,7 @@ ALTER TABLE ONLY public.ree
 
 
 --
+-- TOC entry 5342 (class 2606 OID 17096)
 -- Name: sab sab_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5663,6 +6102,7 @@ ALTER TABLE ONLY public.sab
 
 
 --
+-- TOC entry 5344 (class 2606 OID 17102)
 -- Name: sbt sbt_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5671,6 +6111,7 @@ ALTER TABLE ONLY public.sbt
 
 
 --
+-- TOC entry 5346 (class 2606 OID 17108)
 -- Name: scs scs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5679,6 +6120,7 @@ ALTER TABLE ONLY public.scs
 
 
 --
+-- TOC entry 5348 (class 2606 OID 17114)
 -- Name: shb shb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5687,6 +6129,7 @@ ALTER TABLE ONLY public.shb
 
 
 --
+-- TOC entry 5350 (class 2606 OID 17120)
 -- Name: sip sip_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5695,6 +6138,7 @@ ALTER TABLE ONLY public.sip
 
 
 --
+-- TOC entry 5352 (class 2606 OID 17126)
 -- Name: sjs sjs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5703,6 +6147,7 @@ ALTER TABLE ONLY public.sjs
 
 
 --
+-- TOC entry 5354 (class 2606 OID 17132)
 -- Name: ssb ssb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5711,6 +6156,7 @@ ALTER TABLE ONLY public.ssb
 
 
 --
+-- TOC entry 5404 (class 2606 OID 18497)
 -- Name: ssi ssi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5719,6 +6165,7 @@ ALTER TABLE ONLY public.ssi
 
 
 --
+-- TOC entry 5356 (class 2606 OID 17144)
 -- Name: stb stb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5727,6 +6174,7 @@ ALTER TABLE ONLY public.stb
 
 
 --
+-- TOC entry 5358 (class 2606 OID 17150)
 -- Name: szc szc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5735,6 +6183,7 @@ ALTER TABLE ONLY public.szc
 
 
 --
+-- TOC entry 5360 (class 2606 OID 17156)
 -- Name: tch tch_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5743,6 +6192,7 @@ ALTER TABLE ONLY public.tch
 
 
 --
+-- TOC entry 5362 (class 2606 OID 17162)
 -- Name: tpb tpb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5751,6 +6201,7 @@ ALTER TABLE ONLY public.tpb
 
 
 --
+-- TOC entry 5364 (class 2606 OID 17168)
 -- Name: vcb vcb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5759,6 +6210,7 @@ ALTER TABLE ONLY public.vcb
 
 
 --
+-- TOC entry 5366 (class 2606 OID 17174)
 -- Name: vcg vcg_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5767,6 +6219,7 @@ ALTER TABLE ONLY public.vcg
 
 
 --
+-- TOC entry 5402 (class 2606 OID 17283)
 -- Name: vci vci_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5775,6 +6228,7 @@ ALTER TABLE ONLY public.vci
 
 
 --
+-- TOC entry 5368 (class 2606 OID 17180)
 -- Name: vgc vgc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5783,6 +6237,7 @@ ALTER TABLE ONLY public.vgc
 
 
 --
+-- TOC entry 5370 (class 2606 OID 17186)
 -- Name: vhc vhc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5791,6 +6246,7 @@ ALTER TABLE ONLY public.vhc
 
 
 --
+-- TOC entry 5372 (class 2606 OID 17192)
 -- Name: vhm vhm_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5799,6 +6255,7 @@ ALTER TABLE ONLY public.vhm
 
 
 --
+-- TOC entry 5374 (class 2606 OID 17198)
 -- Name: vib vib_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5807,6 +6264,7 @@ ALTER TABLE ONLY public.vib
 
 
 --
+-- TOC entry 5376 (class 2606 OID 17204)
 -- Name: vic vic_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5815,6 +6273,7 @@ ALTER TABLE ONLY public.vic
 
 
 --
+-- TOC entry 5378 (class 2606 OID 17210)
 -- Name: vix vix_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5823,6 +6282,7 @@ ALTER TABLE ONLY public.vix
 
 
 --
+-- TOC entry 5380 (class 2606 OID 17216)
 -- Name: vjc vjc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5831,6 +6291,7 @@ ALTER TABLE ONLY public.vjc
 
 
 --
+-- TOC entry 5382 (class 2606 OID 17222)
 -- Name: vnd vnd_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5839,6 +6300,7 @@ ALTER TABLE ONLY public.vnd
 
 
 --
+-- TOC entry 5384 (class 2606 OID 17228)
 -- Name: vnm vnm_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5847,6 +6309,7 @@ ALTER TABLE ONLY public.vnm
 
 
 --
+-- TOC entry 5386 (class 2606 OID 17234)
 -- Name: vpb vpb_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5855,6 +6318,7 @@ ALTER TABLE ONLY public.vpb
 
 
 --
+-- TOC entry 5388 (class 2606 OID 17240)
 -- Name: vpi vpi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5863,6 +6327,7 @@ ALTER TABLE ONLY public.vpi
 
 
 --
+-- TOC entry 5390 (class 2606 OID 17246)
 -- Name: vpl vpl_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5871,6 +6336,7 @@ ALTER TABLE ONLY public.vpl
 
 
 --
+-- TOC entry 5392 (class 2606 OID 17252)
 -- Name: vre vre_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5879,6 +6345,7 @@ ALTER TABLE ONLY public.vre
 
 
 --
+-- TOC entry 5394 (class 2606 OID 17258)
 -- Name: vsc vsc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5887,6 +6354,7 @@ ALTER TABLE ONLY public.vsc
 
 
 --
+-- TOC entry 5396 (class 2606 OID 17264)
 -- Name: vtp vtp_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -5894,9 +6362,11 @@ ALTER TABLE ONLY public.vtp
     ADD CONSTRAINT vtp_pkey PRIMARY KEY ("time");
 
 
+-- Completed on 2026-03-24 13:25:42
+
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict wKqHBNYrdkeaOFcuhjBlO5MJsdl2RvwotuSk1WuCUtFw7zru0wMzyeZA18mZ1mV
+\unrestrict UkOucpbU83OPflCOyWIJK600gQN4Ez4JkyaBfE7lsvCJrOwRxHysel4Hov13LPO
 
