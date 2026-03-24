@@ -43,33 +43,33 @@ INSERT INTO public.company_info (symbol, icb_name2, listing_date, ceo_name)
 VALUES (%s, %s, %s, %s)
 ON CONFLICT (symbol) DO NOTHING;
 """
-A=['ACB','HHV','PAN','VTP']
+A = ['SSI']
+# for symbol in A:
+#     company = info_company(symbol)
+#     cur.execute(insert_query, company[['symbol', 'icb_name2', 'listing_date', 'ceo_name']].values.tolist())
+#     conn.commit()
 for symbol in A:
-    company = info_company(symbol)
-    cur.execute(insert_query, company[['symbol', 'icb_name2', 'listing_date', 'ceo_name']].values.tolist())
+    Create_table = f"""
+    CREATE TABLE IF NOT EXISTS {symbol}(
+        symbol VARCHAR(255),
+        time DATE PRIMARY KEY,
+        open FLOAT,  
+        high FLOAT,
+        low FLOAT,
+        close FLOAT,
+        volume BIGINT,
+        percent_change FLOAT
+    );"""
+    cur.execute(Create_table)
     conn.commit()
-# for symbol in List:
-#     Create_table = f"""
-#     CREATE TABLE IF NOT EXISTS {symbol}(
-#         symbol VARCHAR(255),
-#         time DATE PRIMARY KEY,
-#         open FLOAT,  
-#         high FLOAT,
-#         low FLOAT,
-#         close FLOAT,
-#         volume BIGINT,
-#         percent_change FLOAT
-#     );"""
-#     cur.execute(Create_table)
-#     conn.commit()
-#     insert_query = f"""
-#     INSERT INTO {symbol} (symbol, time, open, high, low, close, volume, percent_change)
-#     VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-#     ON CONFLICT (time) DO NOTHING;
-#     """
-#     history_quote_data = history_quote(symbol, '01012026', '01022026')
-#     cur.executemany(insert_query, history_quote_data[['symbol', 'time', 'open', 'high', 'low', 'close', 'volume', 'percent_change']].values.tolist())
-#     conn.commit()
+    insert_query = f"""
+    INSERT INTO {symbol} (symbol, time, open, high, low, close, volume, percent_change)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    ON CONFLICT (time) DO NOTHING;
+    """
+    history_quote_data = history_quote(symbol, '01102025', '01022026')
+    cur.executemany(insert_query, history_quote_data[['symbol', 'time', 'open', 'high', 'low', 'close', 'volume', 'percent_change']].values.tolist())
+    conn.commit()
 
 cur.close()
 conn.close()
