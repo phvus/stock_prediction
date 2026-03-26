@@ -1379,41 +1379,6 @@ if "prediction_diagnostics" in st.session_state:
         gcols[2].metric("GARCH Dist", str(garch_block.get("distribution", "normal")).upper())
         st.caption(garch_block.get("reason", "Auto-GARCH completed."))
 
-        htable = pd.DataFrame(prediction.get("horizon_table", []))
-        trials_df = pd.DataFrame(garch_block.get("trials", []))
-        criterion_col = str(garch_block.get("criterion", prediction.get("criterion", "aic"))).lower()
-        if "forecast_volatility" in htable.columns and not htable.empty:
-            st.markdown("#### GARCH Interactive Visualization")
-            g_tabs = st.tabs(["Price + Volatility Overlay", "Volatility Curve", "Auto-GARCH Search"])
-
-            with g_tabs[0]:
-                overlay_fig = make_garch_forecast_overlay_chart(htable)
-                st.plotly_chart(overlay_fig, use_container_width=True)
-
-                selected_h = st.select_slider(
-                    "Inspect horizon",
-                    options=htable["horizon_days"].astype(int).tolist(),
-                    value=int(htable["horizon_days"].astype(int).iloc[0]),
-                )
-                selected_row = htable[htable["horizon_days"] == selected_h].iloc[0]
-                hcols = st.columns(4)
-                hcols[0].metric("Horizon", f"D+{int(selected_h)}")
-                hcols[1].metric("Predicted Price", f"{float(selected_row['predicted_price']):.2f}")
-                hcols[2].metric("Volatility", f"{float(selected_row['forecast_volatility']):.6f}")
-                hcols[3].metric("Trend", str(selected_row.get("trend", "N/A")))
-
-            with g_tabs[1]:
-                vol_fig = make_garch_volatility_term_structure_chart(htable)
-                st.plotly_chart(vol_fig, use_container_width=True)
-
-            with g_tabs[2]:
-                if not trials_df.empty:
-                    heatmap_fig = make_garch_search_heatmap(trials_df, criterion_col)
-                    st.plotly_chart(heatmap_fig, use_container_width=True)
-                    st.dataframe(trials_df.sort_values(["p", "q"]), use_container_width=True)
-                else:
-                    st.info("No Auto-GARCH trial diagnostics were returned.")
-
     st.caption(f"Model type used: {prediction.get('model_type', selected_model_type).upper()}")
     st.info(explain_model_parameters(selected_model_type, prediction["selected_order"], use_log_returns, use_sentiment, use_volume))
 
@@ -1484,31 +1449,6 @@ if "val_summary" in st.session_state and "val_details" in st.session_state:
 
         val_fig = make_validation_chart(val_details, chart_horizon)
         st.plotly_chart(val_fig, use_container_width=True)
-
-        horizon_row = val_summary[val_summary["horizon_days"] == chart_horizon]
-        if not horizon_row.empty and "high_vol_hit_rate_pct" in horizon_row.columns:
-            hv = horizon_row.iloc[0].get("high_vol_hit_rate_pct", np.nan)
-            corr = horizon_row.iloc[0].get("vol_error_corr", np.nan)
-            avg_vol = horizon_row.iloc[0].get("avg_forecast_volatility", np.nan)
-            if pd.notna(hv) or pd.notna(corr) or pd.notna(avg_vol):
-                st.markdown("#### GARCH Validation Diagnostics")
-                gcols = st.columns(3)
-                gcols[0].metric(
-                    "High-Vol Hit Rate (<1% Err)",
-                    f"{float(hv):.2f}%" if pd.notna(hv) else "N/A",
-                )
-                gcols[1].metric(
-                    "Volatility-Error Correlation",
-                    f"{float(corr):.2f}" if pd.notna(corr) else "N/A",
-                )
-                gcols[2].metric(
-                    "Average Forecast Volatility",
-                    f"{float(avg_vol):.6f}" if pd.notna(avg_vol) else "N/A",
-                )
-
-                garch_val_fig = make_garch_validation_diagnostic_chart(val_details, chart_horizon)
-                if garch_val_fig.data:
-                    st.plotly_chart(garch_val_fig, use_container_width=True)
 
         if "val_history_used" in st.session_state:
             combined_fig = make_validation_window_chart(
