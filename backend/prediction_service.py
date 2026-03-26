@@ -46,6 +46,18 @@ def build_candidate_orders(use_log_returns: bool) -> List[Tuple[int, int, int]]:
     return constrained or list(CANDIDATE_ORDERS)
 
 
+def _force_no_ma_orders(orders: Iterable[Tuple[int, int, int]]) -> List[Tuple[int, int, int]]:
+    """Force q=0 to remove MA term from ARIMAX when Student-t GARCH mode is selected."""
+    seen = set()
+    normalized: List[Tuple[int, int, int]] = []
+    for p, d, _ in orders:
+        candidate = (int(p), int(d), 0)
+        if candidate not in seen:
+            seen.add(candidate)
+            normalized.append(candidate)
+    return normalized
+
+
 def trend_label(current_price: float, predicted_price: float, neutral_threshold_pct: float = 0.4) -> str:
     """Classify trend as Upward/Downward/Sideways using percent change."""
     if current_price == 0:
@@ -557,6 +569,12 @@ def predict_series(
 
     effective_log_returns = bool(garch_log_returns) if use_garch else bool(use_log_returns)
     candidate_orders = build_candidate_orders(use_log_returns=effective_log_returns)
+    student_garch_mode = bool(use_garch and (garch_distribution or "").lower().startswith("student"))
+
+    if student_garch_mode:
+        # User-requested behavior: in Student-t GARCH mode, replace the ARIMAX MA part.
+        candidate_orders = _force_no_ma_orders(candidate_orders)
+        manual_order = (int(manual_order[0]), int(manual_order[1]), 0)
 
     if effective_log_returns:
         df = df.copy()
@@ -597,8 +615,28 @@ def predict_series(
         )
         payload["garch"] = garch_payload
         if garch_payload.get("forecast_volatility"):
-            vol_map = {h: float(garch_payload["forecast_volatility"][h - 1]) for h in valid_horizons}
+            vol_arr = garch_payload["forecast_volatility"]
+            vol_map = {h: float(vol_arr[h - 1]) for h in valid_horizons}
             payload["horizon_table"]["forecast_volatility"] = payload["horizon_table"]["horizon_days"].map(vol_map)
+
+            # Keep Gaussian mode behavior unchanged.
+            # Only Student-t mode rewrites CI from GARCH volatility bands.
+            if student_garch_mode:
+                z_score = 2.1
+                new_lower_ci = []
+                new_upper_ci = []
+                for i, p in enumerate(payload["forecast"]["predictions"]):
+                    dynamic_band = z_score * vol_arr[i]
+                    new_lower_ci.append(p - dynamic_band)
+                    new_upper_ci.append(p + dynamic_band)
+
+                payload["forecast"]["lower_ci"] = new_lower_ci
+                payload["forecast"]["upper_ci"] = new_upper_ci
+
+                for idx, row in payload["horizon_table"].iterrows():
+                    h_idx = int(row["horizon_days"]) - 1
+                    payload["horizon_table"].at[idx, "lower_ci"] = new_lower_ci[h_idx]
+                    payload["horizon_table"].at[idx, "upper_ci"] = new_upper_ci[h_idx]
     else:
         payload["garch"] = {"enabled": False}
 
