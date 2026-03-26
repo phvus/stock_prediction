@@ -4,6 +4,7 @@ from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 import numpy as np
 import pandas as pd
+from arch import arch_model
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from statsmodels.tsa.stattools import acf, pacf
@@ -24,6 +25,16 @@ CANDIDATE_ORDERS: Sequence[Tuple[int, int, int]] = (
 )
 
 SUPPORTED_MODEL_TYPES = ("arima", "arimax")
+
+
+def _normalize_ic(criterion: str) -> str:
+    crit = (criterion or "aic").strip().lower()
+    return "bic" if crit == "bic" else "aic"
+
+
+def _score_by_ic(model_fit, criterion: str) -> float:
+    crit = _normalize_ic(criterion)
+    return float(model_fit.bic if crit == "bic" else model_fit.aic)
 
 
 def build_candidate_orders(use_log_returns: bool) -> List[Tuple[int, int, int]]:
@@ -48,19 +59,24 @@ def trend_label(current_price: float, predicted_price: float, neutral_threshold_
     return "Sideways"
 
 
-def select_best_order(df: pd.DataFrame, candidate_orders: Optional[Iterable[Tuple[int, int, int]]] = None) -> Tuple[int, int, int]:
-    """Pick ARIMA order with lowest AIC over a candidate grid."""
+def select_best_order(
+    df: pd.DataFrame,
+    candidate_orders: Optional[Iterable[Tuple[int, int, int]]] = None,
+    criterion: str = "aic",
+) -> Tuple[int, int, int]:
+    """Pick ARIMA order with lowest selected information criterion over a candidate grid."""
     series = prepare_data(df)
     orders = list(candidate_orders or CANDIDATE_ORDERS)
 
     best_order = DEFAULT_ORDER
-    best_aic = float("inf")
+    best_score = float("inf")
 
     for order in orders:
         try:
             fitted = fit_arima(series, order=order)
-            if fitted.aic < best_aic:
-                best_aic = fitted.aic
+            score = _score_by_ic(fitted, criterion)
+            if score < best_score:
+                best_score = score
                 best_order = order
         except Exception:
             continue
@@ -73,6 +89,7 @@ def get_order_diagnostics(
     model_type: str = "arima",
     use_sentiment: bool = False,
     use_volume: bool = False,
+    criterion: str = "aic",
     candidate_orders: Optional[Iterable[Tuple[int, int, int]]] = None,
 ) -> pd.DataFrame:
     """Return per-order AIC/BIC diagnostics used by auto-selection."""
@@ -147,8 +164,10 @@ def get_order_diagnostics(
         return pd.DataFrame(columns=["order", "p", "d", "q", "aic", "bic", "status"])
 
     diagnostics = pd.DataFrame(rows)
-    diagnostics["aic_rank"] = diagnostics["aic"].rank(method="dense", na_option="bottom")
-    diagnostics = diagnostics.sort_values(["aic_rank", "bic"], na_position="last").reset_index(drop=True)
+    selected_col = _normalize_ic(criterion)
+    diagnostics["selected_ic"] = diagnostics[selected_col]
+    diagnostics["selected_rank"] = diagnostics["selected_ic"].rank(method="dense", na_option="bottom")
+    diagnostics = diagnostics.sort_values(["selected_rank", "aic", "bic"], na_position="last").reset_index(drop=True)
     return diagnostics
 
 
@@ -210,12 +229,13 @@ def select_best_order_arimax(
     candidate_orders: Optional[Iterable[Tuple[int, int, int]]] = None,
     use_sentiment: bool = False,
     use_volume: bool = False,
+    criterion: str = "aic",
 ) -> Tuple[int, int, int]:
     y, exog = _prepare_arimax_data(df, use_sentiment=use_sentiment, use_volume=use_volume)
     orders = list(candidate_orders or CANDIDATE_ORDERS)
 
     best_order = DEFAULT_ORDER
-    best_aic = float("inf")
+    best_score = float("inf")
     for order in orders:
         try:
             model = SARIMAX(
@@ -226,8 +246,9 @@ def select_best_order_arimax(
                 enforce_invertibility=False,
             )
             fitted = model.fit(disp=False)
-            if fitted.aic < best_aic:
-                best_aic = fitted.aic
+            score = _score_by_ic(fitted, criterion)
+            if score < best_score:
+                best_score = score
                 best_order = order
         except Exception:
             continue
@@ -239,10 +260,11 @@ def _predict_series_arima(
     valid_horizons: Sequence[int],
     auto_order: bool,
     manual_order: Tuple[int, int, int],
+    criterion: str = "aic",
     candidate_orders: Optional[Iterable[Tuple[int, int, int]]] = None,
 ) -> Dict[str, object]:
     steps = max(valid_horizons)
-    order = select_best_order(df, candidate_orders=candidate_orders) if auto_order else manual_order
+    order = select_best_order(df, candidate_orders=candidate_orders, criterion=criterion) if auto_order else manual_order
 
     result = forecast_vnindex(
         df=df,
@@ -294,6 +316,7 @@ def _predict_series_arimax(
     manual_order: Tuple[int, int, int],
     use_sentiment: bool = False,
     use_volume: bool = False,
+    criterion: str = "aic",
     candidate_orders: Optional[Iterable[Tuple[int, int, int]]] = None,
 ) -> Dict[str, object]:
     steps = max(valid_horizons)
@@ -302,6 +325,7 @@ def _predict_series_arimax(
             df,
             candidate_orders=candidate_orders,
             use_sentiment=use_sentiment, use_volume=use_volume,
+            criterion=criterion,
         )
         if auto_order
         else manual_order
@@ -415,6 +439,80 @@ def _predict_series_arimax(
     }
 
 
+def _fit_arimax_residual_series(
+    df: pd.DataFrame,
+    order: Tuple[int, int, int],
+    use_sentiment: bool,
+    use_volume: bool,
+) -> pd.Series:
+    y, exog = _prepare_arimax_data(df, use_sentiment=use_sentiment, use_volume=use_volume)
+    fit = SARIMAX(
+        y,
+        exog=exog,
+        order=order,
+        enforce_stationarity=False,
+        enforce_invertibility=False,
+    ).fit(disp=False)
+    resid = pd.Series(fit.resid, index=y.index).replace([np.inf, -np.inf], np.nan).dropna()
+    return resid
+
+
+def _run_auto_garch(
+    residuals: pd.Series,
+    steps: int,
+    criterion: str,
+    distribution: str,
+) -> Dict[str, object]:
+    dist = "t" if (distribution or "normal").lower().startswith("student") else "normal"
+    best_fit = None
+    best_cfg: Optional[Tuple[int, int]] = None
+    best_score = float("inf")
+    trials: List[Dict[str, object]] = []
+
+    for p in (1, 2):
+        for q in (1, 2):
+            try:
+                am = arch_model(residuals, mean="Zero", vol="GARCH", p=p, q=q, dist=dist)
+                fit = am.fit(disp="off")
+                score = _score_by_ic(fit, criterion)
+                trials.append({"p": p, "q": q, "aic": float(fit.aic), "bic": float(fit.bic), "status": "ok"})
+                if score < best_score:
+                    best_score = score
+                    best_fit = fit
+                    best_cfg = (p, q)
+            except Exception as exc:
+                trials.append({"p": p, "q": q, "aic": np.nan, "bic": np.nan, "status": f"failed: {type(exc).__name__}"})
+
+    if best_fit is None or best_cfg is None:
+        return {
+            "enabled": True,
+            "distribution": dist,
+            "selected_order": None,
+            "criterion": _normalize_ic(criterion),
+            "forecast_volatility": [],
+            "trials": trials,
+            "reason": "No GARCH candidate converged.",
+        }
+
+    fc = best_fit.forecast(horizon=steps)
+    var_arr = fc.variance.values[-1].tolist()
+    vol_arr = [float(np.sqrt(max(v, 0.0))) for v in var_arr]
+
+    return {
+        "enabled": True,
+        "distribution": dist,
+        "selected_order": {"p": int(best_cfg[0]), "q": int(best_cfg[1])},
+        "criterion": _normalize_ic(criterion),
+        "forecast_volatility": vol_arr,
+        "forecast_variance": [float(v) for v in var_arr],
+        "trials": trials,
+        "reason": (
+            f"Selected GARCH({best_cfg[0]},{best_cfg[1]}) with lowest {_normalize_ic(criterion).upper()} "
+            f"under {dist} distribution."
+        ),
+    }
+
+
 def get_acf_pacf(df: pd.DataFrame, lags: int = 15) -> tuple[list[float], list[float]]:
     try:
         from model.arima_model import prepare_data
@@ -436,6 +534,11 @@ def predict_series(
     use_log_returns: bool = False,
     use_sentiment: bool = False,
     use_volume: bool = False,
+    criterion: str = "aic",
+    use_garch: bool = False,
+    garch_distribution: str = "normal",
+    rolling_window: bool = True,
+    garch_log_returns: bool = True,
 ) -> Dict[str, object]:
     """Run forecasting pipeline and return horizon-specific summaries."""
     valid_horizons = sorted({int(h) for h in horizons if int(h) > 0})
@@ -446,9 +549,16 @@ def predict_series(
     if mode not in SUPPORTED_MODEL_TYPES:
         raise ValueError(f"Unsupported model_type '{model_type}'. Choose one of {SUPPORTED_MODEL_TYPES}.")
 
-    candidate_orders = build_candidate_orders(use_log_returns=use_log_returns)
+    if use_garch and not rolling_window:
+        raise ValueError("Rolling window must be enabled when GARCH mode is on.")
 
-    if use_log_returns:
+    if use_garch:
+        mode = "arimax"
+
+    effective_log_returns = bool(garch_log_returns) if use_garch else bool(use_log_returns)
+    candidate_orders = build_candidate_orders(use_log_returns=effective_log_returns)
+
+    if effective_log_returns:
         df = df.copy()
         df["Close"] = np.log(df["Close"])
 
@@ -459,6 +569,7 @@ def predict_series(
             auto_order=auto_order,
             manual_order=manual_order,
             use_sentiment=use_sentiment, use_volume=use_volume,
+            criterion=criterion,
             candidate_orders=candidate_orders,
         )
     else:
@@ -467,10 +578,31 @@ def predict_series(
             valid_horizons=valid_horizons,
             auto_order=auto_order,
             manual_order=manual_order,
+            criterion=criterion,
             candidate_orders=candidate_orders,
         )
-        
-    if use_log_returns:
+
+    if use_garch:
+        resid = _fit_arimax_residual_series(
+            df=df,
+            order=payload["selected_order"],
+            use_sentiment=use_sentiment,
+            use_volume=use_volume,
+        )
+        garch_payload = _run_auto_garch(
+            residuals=resid,
+            steps=max(valid_horizons),
+            criterion=criterion,
+            distribution=garch_distribution,
+        )
+        payload["garch"] = garch_payload
+        if garch_payload.get("forecast_volatility"):
+            vol_map = {h: float(garch_payload["forecast_volatility"][h - 1]) for h in valid_horizons}
+            payload["horizon_table"]["forecast_volatility"] = payload["horizon_table"]["horizon_days"].map(vol_map)
+    else:
+        payload["garch"] = {"enabled": False}
+
+    if effective_log_returns:
         payload["last_known_price"] = float(np.exp(payload["last_known_price"]))
         payload["forecast"]["predictions"] = [float(np.exp(x)) for x in payload["forecast"]["predictions"]]
         payload["forecast"]["lower_ci"] = [float(np.exp(x)) for x in payload["forecast"]["lower_ci"]]
@@ -504,25 +636,29 @@ def predict_series(
             df=df,
             model_type=mode,
             use_sentiment=use_sentiment, use_volume=use_volume,
+            criterion=criterion,
             candidate_orders=candidate_orders,
         )
         payload["order_diagnostics"] = order_diag_df.to_dict(orient="records")
-        ok_orders = order_diag_df[order_diag_df["status"] == "ok"].sort_values("aic")
+        selected_col = _normalize_ic(criterion)
+        ok_orders = order_diag_df[order_diag_df["status"] == "ok"].sort_values(selected_col)
         if not ok_orders.empty:
             best = ok_orders.iloc[0]
             runner_up = ok_orders.iloc[1] if len(ok_orders) > 1 else None
             if runner_up is not None:
-                aic_gap = float(runner_up["aic"] - best["aic"])
+                ic_gap = float(runner_up[selected_col] - best[selected_col])
                 payload["order_selection_reason"] = (
-                    f"Selected {best['order']} because it has the lowest AIC ({best['aic']:.2f}). "
-                    f"Next best is {runner_up['order']} at AIC {runner_up['aic']:.2f} (gap {aic_gap:.2f})."
+                    f"Selected {best['order']} because it has the lowest {selected_col.upper()} "
+                    f"({best[selected_col]:.2f}). Next best is {runner_up['order']} at "
+                    f"{selected_col.upper()} {runner_up[selected_col]:.2f} (gap {ic_gap:.2f})."
                 )
             else:
                 payload["order_selection_reason"] = (
-                    f"Selected {best['order']} because it is the only successful candidate with AIC {best['aic']:.2f}."
+                    f"Selected {best['order']} because it is the only successful candidate with "
+                    f"{selected_col.upper()} {best[selected_col]:.2f}."
                 )
 
-            if not use_log_returns:
+            if not effective_log_returns:
                 payload["order_selection_reason"] += (
                     " Raw-price mode excludes d=0 orders to avoid mean-reversion jumps that may disconnect "
                     "forecasts from the latest observed level."
@@ -536,4 +672,6 @@ def predict_series(
         )
 
     payload["model_type"] = mode
+    payload["criterion"] = _normalize_ic(criterion)
+    payload["rolling_window"] = bool(rolling_window)
     return payload

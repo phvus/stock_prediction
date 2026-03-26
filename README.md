@@ -15,6 +15,10 @@ This branch combines:
 - Trend labels: `Upward`, `Downward`, `Sideways`
 - Sector grouping and batch sector prediction scan
 - Auto-ARIMA order selection (AIC-based search over common orders)
+- Optional Auto-GARCH volatility modeling (AIC/BIC model selection, Normal/Student-t)
+- Phase 2 backtest now includes GARCH-aware diagnostics:
+  - High-volatility hit rate (<1% error)
+  - Volatility-error correlation
 
 ## Environment Variables
 
@@ -66,3 +70,19 @@ In the app, you can:
 - Use auto ARIMA order search or manual `(p,d,q)`
 - View chart, confidence interval, metrics, and trend direction
 - Run sector group scan to compare sectors
+
+## Phase 2 GARCH Validation (Historical Backtest)
+
+When GARCH is enabled in Phase 1, the same volatility signal is now propagated into Phase 2 backtest rows.
+
+Two additional validation results are computed for each horizon:
+
+1. `High-Vol Hit Rate (<1% Err)`
+  - Build the high-volatility bucket from the top 30% of `forecast_volatility` values in the selected horizon.
+  - Compute the share of samples in that bucket where absolute percentage error is <= 1%.
+
+2. `Volatility-Error Correlation`
+  - Compute Pearson correlation between `forecast_volatility` and `abs_pct_error`.
+  - Positive values suggest larger forecasted volatility tends to coincide with larger realized forecast error.
+
+These diagnostics are shown in the Phase 2 panel as metric cards and an interactive chart overlaying forecast volatility against absolute percentage error.

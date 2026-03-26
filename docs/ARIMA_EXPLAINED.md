@@ -186,3 +186,23 @@ ma.L1:  P>|z| = 0.001   ← GOOD
 > Plus, ARIMA gives us **confidence intervals** — we don't just say 'the price will be 1250,' we say 'we're 95% confident it'll be between 1230 and 1270.' This shows we understand uncertainty in financial data.
 >
 > Our model achieved a MAPE of approximately X%, meaning our average error is only X% of the actual price. For a 7-day forecast horizon, this is competitive with more complex models."
+
+---
+
+## 8. GARCH Integration in Phase 2 (Historical Validation)
+
+When Auto-GARCH is enabled, volatility forecasts are generated in Phase 1 and carried into each Phase 2 historical backtest sample.
+
+The backtest now reports two extra risk-aware results:
+
+1. High-Vol Hit Rate (<1% Err)
+- Definition: hit rate in the top 30% forecast-volatility bucket.
+- Interpretation: measures how reliable predictions remain during stressed/high-volatility periods.
+
+2. Volatility-Error Correlation
+- Definition: correlation between forecast volatility and realized absolute percentage error.
+- Interpretation: shows whether model errors systematically rise when predicted volatility rises.
+
+Practical use in presentation:
+- Show standard metrics first (D+1/D+3/D+5 hit rate, MAE, directional accuracy).
+- Then add these two GARCH diagnostics to explain model behavior under risk regimes, not only average accuracy.
